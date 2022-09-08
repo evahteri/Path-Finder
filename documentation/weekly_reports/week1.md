@@ -6,5 +6,6 @@
 - Writing the specification document
 
 ## Progress
+- First version of GUI is working
 
 ## Problems/questions

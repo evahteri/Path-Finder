@@ -8,3 +8,21 @@ Path Finder is a algorithm project made for data structures lab course in the Un
 ## Documentation
 - [Timesheet](https://github.com/evahteri/Path-Finder/blob/main/documentation/timesheet.md)
 - [Project specification](https://github.com/evahteri/Path-Finder/blob/main/documentation/specification.md)
+
+## User guide
+
+### Installation
+
+Download this project on your computer and run these commands
+
+#### Install dependencies
+
+```bash
+poetry install
+```
+#### Launching the program
+
+```bash
+poetry run invoke start
+```
+
