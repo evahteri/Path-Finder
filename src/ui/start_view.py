@@ -1,4 +1,5 @@
 from tkinter import constants, ttk
+from PIL import Image, ImageTk
 
 
 class StartViewUi:
@@ -38,3 +39,11 @@ class StartViewUi:
             master=self._frame, text="Dijkstra", command=None
         )
         dijkstra_button.grid(row=3, column=0)
+
+        map_image = Image.open("../Path_Finder/src/static/maps/berlin/berlin_256.png").resize((400,400))
+        map_photo = ImageTk.PhotoImage(map_image)
+
+        image_label = ttk.Label(master=self._frame, image=map_photo, width=256)
+        image_label.image = map_photo
+        image_label.grid(row=4, column=1)
+
