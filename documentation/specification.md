@@ -30,5 +30,5 @@ I am using python and I do not know any other programming languages for peer rev
 My main subject/major in University of Helsinki is Tietojenkäsittelytieteiden kandidaatti. The documentation and program is in English to make sure the whole project is cohesive.
 
 ## Sources
-https://en.wikipedia.org/wiki/Iterative_deepening_A*
-https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/
+- https://en.wikipedia.org/wiki/Iterative_deepening_A*
+- https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/
