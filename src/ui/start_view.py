@@ -40,7 +40,7 @@ class StartViewUi:
         )
         dijkstra_button.grid(row=3, column=0)
 
-        map_image = Image.open("../Path_Finder/src/static/maps/berlin/berlin_256.png").resize((400,400))
+        map_image = Image.open("../Path_Finder/src/static/maps/berlin/berlin_256.png").resize((256,256))
         map_photo = ImageTk.PhotoImage(map_image)
 
         image_label = ttk.Label(master=self._frame, image=map_photo, width=256)
