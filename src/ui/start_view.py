@@ -1,4 +1,4 @@
-from tkinter import constants, ttk
+from tkinter import constants, ttk, Canvas
 from PIL import Image, ImageTk
 
 
@@ -11,6 +11,7 @@ class StartViewUi:
         self._frame = None
 
         self._base()
+        self._grid()
     
     def pack(self):
         """Shows the view
@@ -40,10 +41,29 @@ class StartViewUi:
         )
         dijkstra_button.grid(row=3, column=0)
 
-        map_image = Image.open("../Path_Finder/src/static/maps/berlin/berlin_256.png").resize((256,256))
-        map_photo = ImageTk.PhotoImage(map_image)
+    def _grid(self):
+        size = 20
+        grid = Canvas(self._root)
 
-        image_label = ttk.Label(master=self._frame, image=map_photo, width=256)
-        image_label.image = map_photo
-        image_label.grid(row=4, column=1)
-
+        with open("../Path_Finder/src/static/maps/map_1.txt") as map:
+            y = 0
+            x = 0
+            for row in map:
+                y += 1
+                x = 0
+                for coordinate in row:
+                    if x == 10:
+                        break
+                    if coordinate == ".":
+                        color = "white"
+                    if coordinate == "@":
+                        color = "black"
+                    if coordinate == "x":
+                        color = "red"
+                    x1 = x*size
+                    y1 = y*size
+                    x2 = x1 + size
+                    y2 = y1 + size
+                    grid.create_rectangle((x1, y1, x2, y2), fill=color)
+                    x += 1
+        grid.pack()
