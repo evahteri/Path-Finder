@@ -14,9 +14,11 @@
 - Dijkstra can probably still be optimized
 - Haven't made my own data structures yet
 - Pytest setup done and first test ready
+- Pylint setup done
+- Autopep setup done
 
 
 ## Learning progress
-- Learned a lot from dijkstras theory
+- Learned a lot from dijkstras algorithm
 
 ## Problems/questions

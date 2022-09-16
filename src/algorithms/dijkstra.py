@@ -16,6 +16,26 @@ class Dijkstra():
         self.map = None
         self.neighbours = {}
         self.previous_node = {}
+    
+    def _check_input(self, start, end):
+        try:
+            if int(start[3]) > len(self.map) or int(start[3]) < 0:
+                return False
+            if int(start[1]) > len(self.map) or int(start[1]) < 0:
+                return False 
+            if int(end[3]) > len(self.map) or int(end[3]) < 0:
+                return False
+            if int(end[1]) > len(self.map) or int(end[1]) < 0:
+                return False
+            if self.map[int(start[1])][int(start[3])] == "@":
+                return False
+            if self.map[int(end[1])][int(end[3])] == "@":
+                return False
+        except IndexError:
+            return False
+        return True
+        
+
 
     def _initialize(self):
         """Initializes neighbours for all nodes
@@ -62,11 +82,13 @@ class Dijkstra():
             Distance matrix that has the fastest route nodes marked as "x", and fastest route
             to each node
         """
+        self._initialize()
+        if not self._check_input(start, end):
+            return "incorrect input"
         start_x = int(start[3])
         start_y = int(start[1])
         end_x = int(end[3])
         end_y = int(end[1])
-        self._initialize()
         print(start_x, start_y)
         self.distance_matrix[start_y][start_x] = 0
         heapq.heappush(self.heap, [0, (start_x, start_y)])

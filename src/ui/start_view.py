@@ -13,6 +13,7 @@ class StartViewUi:
         self.grid = Canvas(self._root)
         self.start_coordinate = (0, 0)
         self.end_coordinate = (9, 9)
+        self._grid()
 
         self._base()
 
@@ -97,6 +98,8 @@ class StartViewUi:
         print(end)
         size = 20
         distance_matrix = Dijkstra().find_route(start=start, end=end)
+        if distance_matrix == "incorrect input":
+            return print("incorrect input")
         x = 0
         y = 0
         for row in distance_matrix:
