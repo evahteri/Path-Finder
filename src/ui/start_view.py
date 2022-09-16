@@ -1,5 +1,4 @@
 from tkinter import constants, ttk, Canvas
-from PIL import Image, ImageTk
 from algorithms.dijkstra import Dijkstra
 
 
@@ -7,42 +6,45 @@ class StartViewUi:
     """Class responsible for start view
 
     """
+
     def __init__(self, root):
         self._root = root
         self._frame = None
         self.grid = Canvas(self._root)
-        self.start_coordinate = (0,0)
-        self.end_coordinate = (9,9)
+        self.start_coordinate = (0, 0)
+        self.end_coordinate = (9, 9)
 
         self._base()
-    
+
     def pack(self):
         """Shows the view
 
         """
         self._frame.pack(fill=constants.X)
-    
+
     def destroy(self):
         """Closes the view
 
         """
         self._frame.destroy()
-    
+
     def _base(self):
         self._frame = ttk.Frame(master=self._root)
 
-        start_coordinate_header = ttk.Label(master=self._frame, text="Select start coordinate (for example: (0,0))")
+        start_coordinate_header = ttk.Label(
+            master=self._frame, text="Select start coordinate (for example: (0,0))")
         self.start_coordinate_entry = ttk.Entry(
             master=self._frame, textvariable=self.start_coordinate)
-        
-        start_coordinate_header.grid(row=0,column=0)
+
+        start_coordinate_header.grid(row=0, column=0)
         self.start_coordinate_entry.grid(row=0, column=1)
 
-        end_coordinate_header = ttk.Label(master=self._frame, text="Select end coordinate (for example: (9,9))")
+        end_coordinate_header = ttk.Label(
+            master=self._frame, text="Select end coordinate (for example: (9,9))")
         self.end_coordinate_entry = ttk.Entry(
             master=self._frame, textvariable=self.end_coordinate)
-        
-        end_coordinate_header.grid(row=2,column=0)
+
+        end_coordinate_header.grid(row=2, column=0)
         self.end_coordinate_entry.grid(row=2, column=1)
 
         header = ttk.Label(master=self._frame, text="Select algorithm")
@@ -65,14 +67,14 @@ class StartViewUi:
     def _grid(self):
         size = 20
 
-        with open("../Path_Finder/src/static/maps/map_1.txt") as map:
-            y = 0
-            x = 0
-            for row in map:
-                y += 1
-                x = 0
+        with open("../Path_Finder/src/static/maps/map_1.txt") as current_map:
+            y_coordinate = 0
+            x_coordinate = 0
+            for row in current_map:
+                y_coordinate += 1
+                x_coordinate = 0
                 for coordinate in row:
-                    if x == 10:
+                    if x_coordinate == 10:
                         break
                     if coordinate == ".":
                         color = "white"
@@ -80,12 +82,12 @@ class StartViewUi:
                         color = "black"
                     if coordinate == "x":
                         color = "red"
-                    x1 = x*size
-                    y1 = y*size
+                    x1 = x_coordinate*size
+                    y1 = y_coordinate*size
                     x2 = x1 + size
                     y2 = y1 + size
                     self.grid.create_rectangle((x1, y1, x2, y2), fill=color)
-                    x += 1
+                    x_coordinate += 1
         self.grid.pack()
 
     def _handle_dijkstra(self):
@@ -103,7 +105,7 @@ class StartViewUi:
             for coordinate in row:
                 color = "yellow"
                 if x == 10:
-                        break
+                    break
                 if coordinate == "start":
                     color = "violet"
                 if coordinate == "end":
