@@ -4,6 +4,7 @@ Path Finder is a algorithm project made for data structures lab course in the Un
 
 ## Weekly reports
 - [Week 1](https://github.com/evahteri/Path-Finder/blob/main/documentation/weekly_reports/week1.md)
+- [Week 2](https://github.com/evahteri/Path-Finder/blob/main/documentation/weekly_reports/week2.md)
 
 ## Documentation
 - [Timesheet](https://github.com/evahteri/Path-Finder/blob/main/documentation/timesheet.md)
@@ -25,4 +26,17 @@ poetry install
 ```bash
 poetry run invoke start
 ```
+#### Running tests
+
+```bash
+poetry run invoke test
+```
+
+#### Coverage report
+
+```bash
+poetry run invoke coverage-report
+```
+This command creates a htmlcov folder, where you can find index.html, which includes a visual coverage report
+
 

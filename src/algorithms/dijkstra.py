@@ -1,7 +1,12 @@
 import heapq
 
 class Dijkstra():
+    """Class responsible for the Djikstra algorithm to find shortest path
+    """
     def __init__(self):
+        """Constructor that creates the distance matrix for the shortest distances and
+        establishes all of the dictionaries and lists that the algorithm uses
+        """
         self.distance_matrix = [[999]*10 for _ in range(10)]
         self.unvisited_nodes = []
         self.visited_nodes = []
@@ -12,11 +17,11 @@ class Dijkstra():
     
     
     def _initialize(self):
+        """Initializes neighbours for all nodes
+        """
 
         map = open("../Path_Finder/src/static/maps/map_1.txt" , "r")
         self.map = map.read().splitlines()
-        for row in self.map:
-            print(row)
         y_coordinate = 0
         for y in self.map:
             x_coordinate = 0
@@ -42,6 +47,16 @@ class Dijkstra():
             y_coordinate += 1
         
     def find_route(self, start, end):
+        """The actual algorithm to find the fastest route between start and end node
+
+        Args:
+            start (tuple): Coordinate for the start node
+            end (tuple): Coordinate for the end node
+
+        Returns:
+            Distance matrix that has the fastest route nodes marked as "x", and fastest route
+            to each node
+        """
         start_x = int(start[3])
         start_y = int(start[1])
         end_x = int(end[3])
@@ -79,4 +94,5 @@ class Dijkstra():
         self.distance_matrix[end_y][end_x] = "end"
         for row in self.distance_matrix:
             print(row)
+        print(self.distance_matrix)
         return self.distance_matrix

@@ -13,6 +13,8 @@
 - GUI shows visited nodes as yellow, fastest route as green.
 - Dijkstra can probably still be optimized
 - Haven't made my own data structures yet
+- Pytest setup done and first test ready
+
 
 ## Learning progress
 - Learned a lot from dijkstras theory
