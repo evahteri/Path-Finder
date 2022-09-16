@@ -43,13 +43,16 @@ class Dijkstra():
     def find_route(self):
         self._initialize()
         self.distance_matrix[0][0] = 0
-        heapq.heappush(self.heap, (0,0))
+        heapq.heappush(self.heap, [0,(0,0)])
         while len(self.heap) != 0:
-            node = heapq.heappop(self.heap)
+            node_tuple = heapq.heappop(self.heap)
+            node = (node_tuple[1][0],node_tuple[1][1])
             if node in self.visited_nodes:
                 continue
             self.visited_nodes.append(node)
             for neighbour in self.neighbours[node]:
+                if neighbour in self.visited_nodes:
+                    continue
                 x_neighbour = neighbour[0]
                 y_neighbour = neighbour[1]
                 x_node = node[0]
@@ -60,7 +63,7 @@ class Dijkstra():
                     continue
                 if new < now:
                     self.distance_matrix[y_neighbour][x_neighbour] = new
-                    heapq.heappush(self.heap, neighbour)
+                    heapq.heappush(self.heap, (new,neighbour))
         for row in self.distance_matrix:
             print(row)
         return self.distance_matrix
