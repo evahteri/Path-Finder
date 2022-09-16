@@ -11,6 +11,8 @@ class StartViewUi:
         self._root = root
         self._frame = None
         self.grid = Canvas(self._root)
+        self.start_coordinate = (0,0)
+        self.end_coordinate = (9,9)
 
         self._base()
     
@@ -29,13 +31,27 @@ class StartViewUi:
     def _base(self):
         self._frame = ttk.Frame(master=self._root)
 
+        start_coordinate_header = ttk.Label(master=self._frame, text="Select start coordinate (for example: (0,0))")
+        self.start_coordinate_entry = ttk.Entry(
+            master=self._frame, textvariable=self.start_coordinate)
+        
+        start_coordinate_header.grid(row=0,column=0)
+        self.start_coordinate_entry.grid(row=0, column=1)
+
+        end_coordinate_header = ttk.Label(master=self._frame, text="Select end coordinate (for example: (9,9))")
+        self.end_coordinate_entry = ttk.Entry(
+            master=self._frame, textvariable=self.end_coordinate)
+        
+        end_coordinate_header.grid(row=2,column=0)
+        self.end_coordinate_entry.grid(row=2, column=1)
+
         header = ttk.Label(master=self._frame, text="Select algorithm")
-        header.grid(row=0, column=0)
+        header.grid(row=4, column=0)
 
         ida_star_button = ttk.Button(
             master=self._frame, text="IDA*", command=None
         )
-        ida_star_button.grid(row=2, column=0)
+        ida_star_button.grid(row=5, column=0)
 
         dijkstra_button = ttk.Button(
             master=self._frame, text="Dijkstra", command=self._handle_dijkstra
@@ -43,8 +59,8 @@ class StartViewUi:
         show_map_button = ttk.Button(
             master=self._frame, text="Show map", command=self._grid
         )
-        dijkstra_button.grid(row=3, column=0)
-        show_map_button.grid(row=4, column=0)
+        dijkstra_button.grid(row=6, column=0)
+        show_map_button.grid(row=7, column=0)
 
     def _grid(self):
         size = 20
@@ -73,8 +89,12 @@ class StartViewUi:
         self.grid.pack()
 
     def _handle_dijkstra(self):
+        start = self.start_coordinate_entry.get()
+        end = self.end_coordinate_entry.get()
+        print(start)
+        print(end)
         size = 20
-        distance_matrix = Dijkstra().find_route()
+        distance_matrix = Dijkstra().find_route(start=start, end=end)
         x = 0
         y = 0
         for row in distance_matrix:
@@ -84,6 +104,10 @@ class StartViewUi:
                 color = "yellow"
                 if x == 10:
                         break
+                if coordinate == "start":
+                    color = "violet"
+                if coordinate == "end":
+                    color = "violet"
                 if coordinate == 999:
                     color = "white"
                 if coordinate == "@":

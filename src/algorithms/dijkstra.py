@@ -41,10 +41,15 @@ class Dijkstra():
                 x_coordinate += 1
             y_coordinate += 1
         
-    def find_route(self):
+    def find_route(self, start, end):
+        start_x = int(start[3])
+        start_y = int(start[1])
+        end_x = int(end[3])
+        end_y = int(end[1])
         self._initialize()
-        self.distance_matrix[0][0] = 0
-        heapq.heappush(self.heap, [0,(0,0)])
+        print(start_x, start_y)
+        self.distance_matrix[start_y][start_x] = 0
+        heapq.heappush(self.heap, [0,(start_x,start_y)])
         while len(self.heap) != 0:
             node_tuple = heapq.heappop(self.heap)
             node = (node_tuple[1][0],node_tuple[1][1])
@@ -66,11 +71,12 @@ class Dijkstra():
                     self.distance_matrix[y_neighbour][x_neighbour] = new
                     self.previous_node[neighbour] = node
                     heapq.heappush(self.heap, (new,neighbour))
-        end = (9,9)
-        previous = self.previous_node[end]
-        while previous != (0,0):
+        previous = self.previous_node[(end_x, end_y)]
+        while previous != (start_x, start_y):
             self.distance_matrix[previous[1]][previous[0]] = "x"
             previous = self.previous_node[previous]
+        self.distance_matrix[start_y][start_x] = "start"
+        self.distance_matrix[end_y][end_x] = "end"
         for row in self.distance_matrix:
             print(row)
         return self.distance_matrix
