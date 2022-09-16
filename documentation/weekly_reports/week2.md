@@ -19,6 +19,7 @@
 
 
 ## Learning progress
-- Learned a lot from dijkstras algorithm
+- Learned a lot about dijkstras algorithm
 
 ## Problems/questions
+- The algorithm probably isn't implemented how it's supposed to because it visits all of the nodes in the map
