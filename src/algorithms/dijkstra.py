@@ -1,4 +1,5 @@
 import heapq
+import datetime
 
 
 class Dijkstra():
@@ -82,6 +83,7 @@ class Dijkstra():
             Distance matrix that has the fastest route nodes marked as "x", and fastest route
             to each node
         """
+        start_time = datetime.datetime.now()
         self._initialize()
         if not self._check_input(start, end):
             return "incorrect input"
@@ -89,7 +91,6 @@ class Dijkstra():
         start_y = int(start[1])
         end_x = int(end[3])
         end_y = int(end[1])
-        print(start_x, start_y)
         self.distance_matrix[start_y][start_x] = 0
         heapq.heappush(self.heap, [0, (start_x, start_y)])
         while len(self.heap) != 0:
@@ -119,7 +120,6 @@ class Dijkstra():
             previous = self.previous_node[previous]
         self.distance_matrix[start_y][start_x] = "start"
         self.distance_matrix[end_y][end_x] = "end"
-        for row in self.distance_matrix:
-            print(row)
-        print(self.distance_matrix)
+        finish_time = datetime.datetime.now()
+        print(f"Route found in {finish_time-start_time}")
         return self.distance_matrix

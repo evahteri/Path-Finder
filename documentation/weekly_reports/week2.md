@@ -10,13 +10,13 @@
 ## Progress
 - Custom map now shows in gui
 - First version of Dijkstra working
-- GUI shows visited nodes as yellow, fastest route as green.
+- GUI shows visited nodes as yellow, fastest route as green
 - Dijkstra can probably still be optimized
 - Haven't made my own data structures yet
 - Pytest setup done and first test ready
 - Pylint setup done
 - Autopep setup done
-
+- Program now prints the time it took to find the route
 
 ## Learning progress
 - Learned a lot about dijkstras algorithm
