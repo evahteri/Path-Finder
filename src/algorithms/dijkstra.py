@@ -20,6 +20,10 @@ class Dijkstra():
     
     def _check_input(self, start, end):
         try:
+            if len(start) > 5:
+                return False
+            if len(end) > 5:
+                return False
             if int(start[3]) > len(self.map) or int(start[3]) < 0:
                 return False
             if int(start[1]) > len(self.map) or int(start[1]) < 0:

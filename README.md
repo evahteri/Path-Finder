@@ -39,4 +39,12 @@ poetry run invoke coverage-report
 ```
 This command creates a htmlcov folder, where you can find index.html, which includes a visual coverage report
 
+#### Checking style
+
+With this command you can check if code is up to the standard python style of code
+
+```bash
+poetry run invoke lint
+```
+
 
