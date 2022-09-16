@@ -1,5 +1,6 @@
 from tkinter import constants, ttk, Canvas
 from PIL import Image, ImageTk
+from algorithms.dijkstra import Dijkstra
 
 
 class StartViewUi:
@@ -9,9 +10,9 @@ class StartViewUi:
     def __init__(self, root):
         self._root = root
         self._frame = None
+        self.grid = Canvas(self._root)
 
         self._base()
-        self._grid()
     
     def pack(self):
         """Shows the view
@@ -37,13 +38,16 @@ class StartViewUi:
         ida_star_button.grid(row=2, column=0)
 
         dijkstra_button = ttk.Button(
-            master=self._frame, text="Dijkstra", command=None
+            master=self._frame, text="Dijkstra", command=self._handle_dijkstra
+        )
+        show_map_button = ttk.Button(
+            master=self._frame, text="Show map", command=self._grid
         )
         dijkstra_button.grid(row=3, column=0)
+        show_map_button.grid(row=4, column=0)
 
     def _grid(self):
         size = 20
-        grid = Canvas(self._root)
 
         with open("../Path_Finder/src/static/maps/map_1.txt") as map:
             y = 0
@@ -64,6 +68,31 @@ class StartViewUi:
                     y1 = y*size
                     x2 = x1 + size
                     y2 = y1 + size
-                    grid.create_rectangle((x1, y1, x2, y2), fill=color)
+                    self.grid.create_rectangle((x1, y1, x2, y2), fill=color)
                     x += 1
-        grid.pack()
+        self.grid.pack()
+
+    def _handle_dijkstra(self):
+        size = 20
+        distance_matrix = Dijkstra().find_route()
+        x = 0
+        y = 0
+        for row in distance_matrix:
+            y += 1
+            x = 0
+            for coordinate in row:
+                if x == 10:
+                        break
+                if coordinate == 999:
+                    color = "white"
+                if coordinate == "@":
+                    color = "black"
+                else:
+                    color = "red"
+                x1 = x*size
+                y1 = y*size
+                x2 = x1 + size
+                y2 = y1 + size
+                self.grid.create_rectangle((x1, y1, x2, y2), fill=color)
+                x += 1
+        self.grid.pack()
