@@ -9,11 +9,12 @@
 
 ## Progress
 - Custom map now shows in gui
-- First version of Dijkstra done, not working yet as it should
-- GUI shows visited nodes as red
+- First version of Dijkstra working
+- GUI shows visited nodes as yellow, fastest route as green.
+- Dijkstra can probably still be optimized
+- Haven't made my own data structures yet
 
 ## Learning progress
 - Learned a lot from dijkstras theory
 
 ## Problems/questions
-- Algorithm doesn't have a end node yet, still trying to figure out how to keep track of the fastest route

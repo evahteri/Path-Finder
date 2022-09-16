@@ -8,6 +8,7 @@ class Dijkstra():
         self.heap = []
         self.map = None
         self.neighbours = {}
+        self.previous_node = {}
     
     
     def _initialize(self):
@@ -63,7 +64,13 @@ class Dijkstra():
                     continue
                 if new < now:
                     self.distance_matrix[y_neighbour][x_neighbour] = new
+                    self.previous_node[neighbour] = node
                     heapq.heappush(self.heap, (new,neighbour))
+        end = (9,9)
+        previous = self.previous_node[end]
+        while previous != (0,0):
+            self.distance_matrix[previous[1]][previous[0]] = "x"
+            previous = self.previous_node[previous]
         for row in self.distance_matrix:
             print(row)
         return self.distance_matrix

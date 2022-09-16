@@ -81,14 +81,15 @@ class StartViewUi:
             y += 1
             x = 0
             for coordinate in row:
+                color = "yellow"
                 if x == 10:
                         break
                 if coordinate == 999:
                     color = "white"
                 if coordinate == "@":
                     color = "black"
-                else:
-                    color = "red"
+                if coordinate == "x":
+                    color = "green"
                 x1 = x*size
                 y1 = y*size
                 x2 = x1 + size
