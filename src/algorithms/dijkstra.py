@@ -91,10 +91,10 @@ class Dijkstra():
         self._initialize()
         if not self._check_input(start, end):
             return "incorrect input"
-        start_x = int(start[3])
-        start_y = int(start[1])
-        end_x = int(end[3])
-        end_y = int(end[1])
+        start_x = int(start[1])
+        start_y = int(start[3])
+        end_x = int(end[1])
+        end_y = int(end[3])
         self.distance_matrix[start_y][start_x] = 0
         heapq.heappush(self.heap, [0, (start_x, start_y)])
         while len(self.heap) != 0:

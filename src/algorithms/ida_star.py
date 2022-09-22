@@ -45,17 +45,16 @@ class IdaStar():
     
     def find_route(self, start, goal):
         self._initialize()
-        for i in self.graph:
-            print(i)
-            print(self.graph[i])
         start_coordinate = (int(start[1]),int(start[3]))
         goal_coordinate = (int(goal[1]),int(goal[3]))
+        self.distance_matrix[start_coordinate[1]][start_coordinate[0]] = "start"
+        self.distance_matrix[goal_coordinate[1]][goal_coordinate[0]] = "end"
         self.threshold = self._heuristic(start_coordinate, goal_coordinate) # f score is cost of current node x and heuristic of the node x
         while True:
             found_path = self._search(node=start_coordinate,g=0,threshold=self.threshold, goal=goal_coordinate)
             if found_path == "found":
-                print(self.min_value)
-                print("found")
+                self.distance_matrix[start_coordinate[1]][start_coordinate[0]] = "start"
+                self.distance_matrix[goal_coordinate[1]][goal_coordinate[0]] = "end"
                 return self.distance_matrix
             if found_path > self.max_f_value: 
                 return False
@@ -70,10 +69,11 @@ class IdaStar():
         for neighbour in self.graph[node]:
             if neighbour == "@":
                 continue
+            if self.distance_matrix[neighbour[1]][neighbour[0]] != "@":
+                self.distance_matrix[neighbour[1]][neighbour[0]] = 1
             search_result = self._search(neighbour,g+1,threshold, goal) #recursive call for nodes neighbours, g+1 is the cost to travel to that node
             if search_result == "found":
                 self.distance_matrix[node[1]][node[0]] = "x"
-                print(node)
                 return "found"
             if search_result < self.min_value:
                 self.min_value = search_result
@@ -87,5 +87,4 @@ class IdaStar():
             x_distance = x_distance * (-1)
         if y_distance < 0:
             y_distance = y_distance * (-1)
-        print(x_distance + y_distance)
         return x_distance + y_distance

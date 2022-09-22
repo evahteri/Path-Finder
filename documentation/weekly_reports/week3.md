@@ -6,7 +6,8 @@
 
 ## Progress
 - Right now I'll test manhattan distance as a heuristic for IDA*
-- IDA* started, functions with some problems
+- IDA* finds fastest route
+- GUI shows visited nodes as yellow
 
 ## Learning progress
 - Learned how some heuristics work and why IDA* uses less memory
