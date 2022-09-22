@@ -17,7 +17,7 @@ class Dijkstra():
         self.map = None
         self.neighbours = {}
         self.previous_node = {}
-    
+
     def _check_input(self, start, end):
         try:
             if len(start) > 5:
@@ -27,7 +27,7 @@ class Dijkstra():
             if int(start[3]) > len(self.map) or int(start[3]) < 0:
                 return False
             if int(start[1]) > len(self.map) or int(start[1]) < 0:
-                return False 
+                return False
             if int(end[3]) > len(self.map) or int(end[3]) < 0:
                 return False
             if int(end[1]) > len(self.map) or int(end[1]) < 0:
@@ -39,8 +39,6 @@ class Dijkstra():
         except IndexError:
             return False
         return True
-        
-
 
     def _initialize(self):
         """Initializes neighbours for all nodes

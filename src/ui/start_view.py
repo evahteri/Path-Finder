@@ -3,7 +3,6 @@ from algorithms.ida_star import IdaStar
 from algorithms.dijkstra import Dijkstra
 
 
-
 class StartViewUi:
     """Class responsible for start view
 
@@ -158,5 +157,3 @@ class StartViewUi:
                 self.grid.create_rectangle((x1, y1, x2, y2), fill=color)
                 x += 1
         self.grid.pack()
-        
-        

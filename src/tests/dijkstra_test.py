@@ -5,6 +5,7 @@ from algorithms.dijkstra import Dijkstra
 class TestDijkstra(unittest.TestCase):
     """This class tests dijkstra's algorithm
     """
+
     def setUp(self):
         self.correct_route = [['start', 'x', 'x', 'x', 4, 5, 6, 7, 8, 9],
                               ['@', '@', '@', 'x', 5, 6, 7, 8, 9, 10],
@@ -24,19 +25,19 @@ class TestDijkstra(unittest.TestCase):
         distance_matrix = Dijkstra().find_route(start="(0,0)", end="(9,9)")
 
         self.assertEqual(self.correct_route, distance_matrix)
-    
+
     def test_dijkstra_incorrect_start_input_out_or_range(self):
 
         distance_matrix = Dijkstra().find_route(start="(0,10)", end="(9,9)")
 
         self.assertEqual("incorrect input", distance_matrix)
-    
+
     def test_dijkstra_incorrect_end_input_out_or_range(self):
 
         distance_matrix = Dijkstra().find_route(start="(0,0)", end="(9,10)")
 
         self.assertEqual("incorrect input", distance_matrix)
-    
+
     def test_dijkstra_incorrect_start_input_negative(self):
 
         distance_matrix = Dijkstra().find_route(start="(-1,0)", end="(9,9)")
@@ -48,17 +49,15 @@ class TestDijkstra(unittest.TestCase):
         distance_matrix = Dijkstra().find_route(start="(0,0)", end="(9,-2)")
 
         self.assertEqual("incorrect input", distance_matrix)
-    
 
     def test_dijkstra_incorrect_start_input_in_wall(self):
 
         distance_matrix = Dijkstra().find_route(start="(1,0)", end="(9,9)")
 
         self.assertEqual("incorrect input", distance_matrix)
-    
+
     def test_dijkstra_incorrect_end_input_in_wall(self):
 
         distance_matrix = Dijkstra().find_route(start="(0,0)", end="(1,0)")
 
         self.assertEqual("incorrect input", distance_matrix)
-        
