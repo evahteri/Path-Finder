@@ -1,5 +1,7 @@
 from tkinter import constants, ttk, Canvas
+from algorithms.ida_star import IdaStar
 from algorithms.dijkstra import Dijkstra
+
 
 
 class StartViewUi:
@@ -52,7 +54,7 @@ class StartViewUi:
         header.grid(row=4, column=0)
 
         ida_star_button = ttk.Button(
-            master=self._frame, text="IDA*", command=None
+            master=self._frame, text="IDA*", command=self._handle_ida_star
         )
         ida_star_button.grid(row=5, column=0)
 
@@ -124,3 +126,11 @@ class StartViewUi:
                 self.grid.create_rectangle((x1, y1, x2, y2), fill=color)
                 x += 1
         self.grid.pack()
+
+    def _handle_ida_star(self):
+        start = self.start_coordinate_entry.get()
+        goal = self.end_coordinate_entry.get()
+        distance = IdaStar().find_route(start=start, goal=goal)
+        print(distance)
+        
+        

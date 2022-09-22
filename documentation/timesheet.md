@@ -5,4 +5,5 @@
 | 13.9.  | 2     | Custom map visualization, studying algorithm           |     
 | 15.9.  | 1     | Implementing dijkstra, no commits                      |
 | 16.9.  | 8     | Working on dijkstra, studying algorithms, testing      |
-| Total  | 15    |                                                        |
+| 22.9.  | 3     | Studying IDA* and heuristics, start IDA* coding        |
+| Total  | 18    |                                                        |
