@@ -7,6 +7,7 @@ class IdaStar():
         self.max_f_value = 25 #maximum cost of shortest path between nodes in the map
         self.threshold = None # f score for the main function
         self.min_value = 999 #cost of shortest path, first a max value
+        self.distance_matrix = [[999]*10 for _ in range(10)]
 
     def _initialize(self):
         current_map = open("../Path_Finder/src/static/maps/map_1.txt", "r")
@@ -38,6 +39,7 @@ class IdaStar():
                         # Handle south neughbour
                 if x == "@":
                     self.graph[(x_coordinate,y_coordinate)] = "@"
+                    self.distance_matrix[y_coordinate][x_coordinate] = "@"
                 x_coordinate += 1
             y_coordinate += 1
     
@@ -54,7 +56,7 @@ class IdaStar():
             if found_path == "found":
                 print(self.min_value)
                 print("found")
-                return True
+                return self.distance_matrix
             if found_path > self.max_f_value: 
                 return False
             self.threshold = found_path
@@ -70,6 +72,8 @@ class IdaStar():
                 continue
             search_result = self._search(neighbour,g+1,threshold, goal) #recursive call for nodes neighbours, g+1 is the cost to travel to that node
             if search_result == "found":
+                self.distance_matrix[node[1]][node[0]] = "x"
+                print(node)
                 return "found"
             if search_result < self.min_value:
                 self.min_value = search_result

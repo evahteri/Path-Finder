@@ -130,7 +130,33 @@ class StartViewUi:
     def _handle_ida_star(self):
         start = self.start_coordinate_entry.get()
         goal = self.end_coordinate_entry.get()
-        distance = IdaStar().find_route(start=start, goal=goal)
-        print(distance)
+        distance_matrix = IdaStar().find_route(start=start, goal=goal)
+        size = 20
+        x = 0
+        y = 0
+        for row in distance_matrix:
+            y += 1
+            x = 0
+            for coordinate in row:
+                color = "yellow"
+                if x == 10:
+                    break
+                if coordinate == "start":
+                    color = "violet"
+                if coordinate == "end":
+                    color = "violet"
+                if coordinate == 999:
+                    color = "white"
+                if coordinate == "@":
+                    color = "black"
+                if coordinate == "x":
+                    color = "green"
+                x1 = x*size
+                y1 = y*size
+                x2 = x1 + size
+                y2 = y1 + size
+                self.grid.create_rectangle((x1, y1, x2, y2), fill=color)
+                x += 1
+        self.grid.pack()
         
         
