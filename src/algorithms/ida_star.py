@@ -1,4 +1,4 @@
-
+import datetime
 
 class IdaStar():
 
@@ -44,6 +44,7 @@ class IdaStar():
             y_coordinate += 1
     
     def find_route(self, start, goal):
+        start_time = datetime.datetime.now()
         self._initialize()
         start_coordinate = (int(start[1]),int(start[3]))
         goal_coordinate = (int(goal[1]),int(goal[3]))
@@ -55,6 +56,8 @@ class IdaStar():
             if found_path == "found":
                 self.distance_matrix[start_coordinate[1]][start_coordinate[0]] = "start"
                 self.distance_matrix[goal_coordinate[1]][goal_coordinate[0]] = "end"
+                finish_time = datetime.datetime.now()
+                print(f" IDA* found route found in {finish_time-start_time}")
                 return self.distance_matrix
             if found_path > self.max_f_value: 
                 return False

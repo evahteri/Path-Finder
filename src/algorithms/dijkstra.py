@@ -125,5 +125,5 @@ class Dijkstra():
         self.distance_matrix[start_y][start_x] = "start"
         self.distance_matrix[end_y][end_x] = "end"
         finish_time = datetime.datetime.now()
-        print(f"Route found in {finish_time-start_time}")
+        print(f"Dijkstra found route in {finish_time-start_time}")
         return self.distance_matrix
