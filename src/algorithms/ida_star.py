@@ -1,8 +1,12 @@
 import datetime
 
 class IdaStar():
+    """Class that includes all functions for ida star algorithm
+    """
 
     def __init__(self):
+        """Constructor that creates all needed data structures and local values
+        """
         self.graph = {}
         self.max_f_value = 25 #maximum cost of shortest path between nodes in the map
         self.threshold = None # f score for the main function
@@ -10,6 +14,8 @@ class IdaStar():
         self.distance_matrix = [[999]*10 for _ in range(10)]
 
     def _initialize(self):
+        """Creates the graph for the algorithm
+        """
         current_map = open("../Path_Finder/src/static/maps/map_1.txt", "r")
         self.map = current_map.read().splitlines()
         for y in range(10):
@@ -44,6 +50,15 @@ class IdaStar():
             y_coordinate += 1
     
     def find_route(self, start, goal):
+        """Main function that uses infinite loop which calls search function to find fastest route
+
+        Args:
+            start (tuple): start node from gui
+            goal (tuple): goal node from gui
+
+        Returns:
+            matrix: distance matrix that has the fastest route and visited nodes marked
+        """
         start_time = datetime.datetime.now()
         self._initialize()
         start_coordinate = (int(start[1]),int(start[3]))
@@ -64,6 +79,17 @@ class IdaStar():
             self.threshold = found_path
 
     def _search(self, node, g, threshold, goal):
+        """Iterative search function
+
+        Args:
+            node (tuple): current node that the main function is handling
+            g (int): g score is the current cost
+            threshold (int): threshold for maximum distance
+            goal (tuple): goal node
+
+        Returns:
+            if path is found: "found" string, if not found: minimum value for the fastest route
+        """
         f = g + self._heuristic(node, goal)
         if f > self.threshold:
             return f
@@ -83,7 +109,16 @@ class IdaStar():
         return self.min_value
     
     def _heuristic(self,start, goal):
-        #Getting manhattan distance between nodes
+        """Heuristic function for the algorithm
+
+        Args:
+            start (tuple): start node
+            goal (tuple): goal node
+
+        Returns:
+            int: Manhattan distance between start and goal node
+        """
+
         x_distance = start[0] - goal[0]
         y_distance = start[1] - goal[1]
         if x_distance < 0:
