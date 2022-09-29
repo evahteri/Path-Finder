@@ -34,7 +34,7 @@ class Heap:
 
         Args:
             node (tuple): Tuple that is (cost, (x_coordinate, y_coordinate))
-            this way the cost is the decifing factor building the heap. 
+            this way the cost is the decifing factor building the heap.
             Accessing node's cost: node[0]
         """
         self._heap.append(node)
