@@ -1,5 +1,5 @@
-import heapq
 import datetime
+from data_structures.heap import Heap
 
 
 class Dijkstra():
@@ -13,7 +13,7 @@ class Dijkstra():
         self.distance_matrix = [[999]*10 for _ in range(10)]
         self.unvisited_nodes = []
         self.visited_nodes = []
-        self.heap = []
+        self.heap = Heap()
         self.map = None
         self.neighbours = {}
         self.previous_node = {}
@@ -94,9 +94,9 @@ class Dijkstra():
         end_x = int(end[1])
         end_y = int(end[3])
         self.distance_matrix[start_y][start_x] = 0
-        heapq.heappush(self.heap, [0, (start_x, start_y)])
-        while len(self.heap) != 0:
-            node_tuple = heapq.heappop(self.heap)
+        self.heap.push([0, (start_x, start_y)])
+        while self.heap.get_heap_len() != 0:
+            node_tuple = self.heap.pop_smallest()
             node = (node_tuple[1][0], node_tuple[1][1])
             if node in self.visited_nodes:
                 continue
@@ -115,7 +115,7 @@ class Dijkstra():
                 if new < now:
                     self.distance_matrix[y_neighbour][x_neighbour] = new
                     self.previous_node[neighbour] = node
-                    heapq.heappush(self.heap, (new, neighbour))
+                    self.heap.push([new, neighbour])
         previous = self.previous_node[(end_x, end_y)]
         while previous != (start_x, start_y):
             self.distance_matrix[previous[1]][previous[0]] = "x"
