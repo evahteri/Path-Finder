@@ -6,4 +6,6 @@
 | 15.9.  | 1     | Implementing dijkstra, no commits                      |
 | 16.9.  | 8     | Working on dijkstra, studying algorithms, testing      |
 | 22.9.  | 3     | Studying IDA* and heuristics, start IDA* coding        |
-| Total  | 18    |                                                        |
+| 28.9.  | 2     | Started working on heap                                |
+| 29.9   | 3     | Finished heap, documentation                           |
+| Total  | 23    |                                                        |
