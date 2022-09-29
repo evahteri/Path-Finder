@@ -12,8 +12,8 @@ class StartViewUi:
         self._root = root
         self._frame = None
         self.grid = Canvas(self._root)
-        self.start_coordinate = (0, 0)
-        self.end_coordinate = (9, 9)
+        self.start_coordinate = None
+        self.end_coordinate = None
         self._grid()
 
         self._base()
@@ -68,7 +68,6 @@ class StartViewUi:
 
     def _grid(self):
         size = 20
-
         with open("../Path_Finder/src/static/maps/map_1.txt") as current_map:
             y_coordinate = 0
             x_coordinate = 0
