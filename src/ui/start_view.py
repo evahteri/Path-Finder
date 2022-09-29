@@ -129,7 +129,7 @@ class StartViewUi:
     def _handle_ida_star(self):
         start = self.start_coordinate_entry.get()
         goal = self.end_coordinate_entry.get()
-        distance_matrix = IdaStar().find_route(start=start, goal=goal)
+        distance_matrix = IdaStar().find_route(start=start, goal=goal)[0]
         size = 20
         x = 0
         y = 0

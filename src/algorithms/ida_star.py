@@ -13,6 +13,7 @@ class IdaStar():
         self.threshold = None  # f score for the main function
         self.min_value = 999  # cost of shortest path, first a max value
         self.distance_matrix = [[999]*10 for _ in range(10)]
+        self.distance = 0
 
     def _initialize(self):
         """Creates the graph for the algorithm
@@ -77,9 +78,10 @@ class IdaStar():
                                      ][start_coordinate[0]] = "start"
                 self.distance_matrix[goal_coordinate[1]
                                      ][goal_coordinate[0]] = "end"
+                print(f"Shortest path length is {self.distance}")
                 finish_time = datetime.datetime.now()
                 print(f" IDA* found route found in {finish_time-start_time}")
-                return self.distance_matrix
+                return (self.distance_matrix, self.distance)
             if found_path > self.max_f_value:
                 return False
             self.threshold = found_path
@@ -110,6 +112,7 @@ class IdaStar():
             search_result = self._search(neighbour, g+1, threshold, goal)
             if search_result == "found":
                 self.distance_matrix[node[1]][node[0]] = "x"
+                self.distance += 1
                 return "found"
             if search_result < self.min_value:
                 self.min_value = search_result
