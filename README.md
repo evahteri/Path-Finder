@@ -20,7 +20,7 @@ Path Finder is a algorithm project made for data structures lab course in the Un
 
 ### Installation
 
-Download this project on your computer and run these commands
+Download this project on your computer and run these commands. Note! If you download the app as a ZIP -file, make sure that, after extraction, you name the parent folder "Path_Finder". Unless it is not named that, the app will not find the map files.
 
 #### Install dependencies
 
