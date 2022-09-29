@@ -96,7 +96,7 @@ class StartViewUi:
         start = self.start_coordinate_entry.get()
         end = self.end_coordinate_entry.get()
         size = 20
-        distance_matrix = Dijkstra().find_route(start=start, end=end)
+        distance_matrix = Dijkstra().find_route(start=start, end=end)[0]
         if distance_matrix == "incorrect input":
             return print("incorrect input")
         x = 0

@@ -117,11 +117,14 @@ class Dijkstra():
                     self.previous_node[neighbour] = node
                     self.heap.push([new, neighbour])
         previous = self.previous_node[(end_x, end_y)]
+        distance = 1
         while previous != (start_x, start_y):
             self.distance_matrix[previous[1]][previous[0]] = "x"
+            distance += 1
             previous = self.previous_node[previous]
         self.distance_matrix[start_y][start_x] = "start"
         self.distance_matrix[end_y][end_x] = "end"
+        print(f"Shorest path length is {distance}")
         finish_time = datetime.datetime.now()
         print(f"Dijkstra found route in {finish_time-start_time}")
-        return self.distance_matrix
+        return (self.distance_matrix, distance)
