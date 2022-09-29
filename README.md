@@ -13,6 +13,7 @@ Path Finder is a algorithm project made for data structures lab course in the Un
 - [Project specification](https://github.com/evahteri/Path-Finder/blob/main/documentation/specification.md)
 - [Test coverage](https://github.com/evahteri/Path-Finder/blob/main/documentation/coverage_report.png)
 - [Test specification](https://github.com/evahteri/Path-Finder/blob/main/documentation/test_specification.md)
+- [Implementation document](https://github.com/evahteri/Path-Finder/blob/main/documentation/implementation.md)
 
 
 ## User guide

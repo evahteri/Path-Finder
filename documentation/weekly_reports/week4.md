@@ -7,6 +7,8 @@
 
 ## Progress
 - Heap done
+- Improved testing for shortest paths
+- Started writing the implementation document
 
 ## Learning progress
 - Python's own heap seems to be quite a bit faster than my implementation.
