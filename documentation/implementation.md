@@ -36,7 +36,12 @@ Pop function will remove the smallest (root) node from the heap and then make th
 TODO
 
 ## Performance
-TODO
+
+Note: Not yet implemented!
+
+The algorithms and heap are tested with multiple inputs. Both algorithms are run multiple times in a row with different coordinates and then time is counted how long it takes. Then the two times can be compared.
+
+Heap functions are tested invidually multiple times and compared to Python's own heapq module.
 
 ## Sources
 
