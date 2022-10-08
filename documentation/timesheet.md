@@ -8,4 +8,5 @@
 | 22.9.  | 3     | Studying IDA* and heuristics, start IDA* coding        |
 | 28.9.  | 2     | Started working on heap                                |
 | 29.9   | 3     | Finished heap, documentation                           |
-| Total  | 23    |                                                        |
+| 8.10   | 3     | Started performance testing                            |
+| Total  | 26    |                                                        |
