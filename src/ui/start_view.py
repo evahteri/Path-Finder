@@ -116,12 +116,16 @@ class StartViewUi:
         self.grid.pack()
 
     def _handle_dijkstra(self):
+        self.grid.delete("all")
         start = self.start_coordinate_entry.get()
         end = self.end_coordinate_entry.get()
-        size = 20
         distance_matrix = Dijkstra().find_route(start=start, end=end)[0]
         if distance_matrix == "incorrect input":
             return print("incorrect input")
+        map_size = 0
+        for i in distance_matrix:
+            map_size += 1
+        self._pixel_size = 300 // map_size
         x = 0
         y = 0
         for row in distance_matrix:
@@ -129,7 +133,7 @@ class StartViewUi:
             x = 0
             for coordinate in row:
                 color = "yellow"
-                if x == 10:
+                if x == map_size:
                     break
                 if coordinate == "start":
                     color = "violet"
@@ -141,19 +145,23 @@ class StartViewUi:
                     color = "black"
                 if coordinate == "x":
                     color = "green"
-                x1 = x*size
-                y1 = y*size
-                x2 = x1 + size
-                y2 = y1 + size
+                x1 = x*self._pixel_size
+                y1 = y*self._pixel_size
+                x2 = x1 + self._pixel_size
+                y2 = y1 + self._pixel_size
                 self.grid.create_rectangle((x1, y1, x2, y2), fill=color)
                 x += 1
         self.grid.pack()
 
     def _handle_ida_star(self):
+        self.grid.delete("all")
         start = self.start_coordinate_entry.get()
         goal = self.end_coordinate_entry.get()
         distance_matrix = IdaStar().find_route(start=start, goal=goal)[0]
-        size = 20
+        map_size = 0
+        for i in distance_matrix:
+            map_size += 1
+        self._pixel_size = 300 // map_size
         x = 0
         y = 0
         for row in distance_matrix:
@@ -161,7 +169,7 @@ class StartViewUi:
             x = 0
             for coordinate in row:
                 color = "yellow"
-                if x == 10:
+                if x == map_size:
                     break
                 if coordinate == "start":
                     color = "violet"
@@ -173,10 +181,10 @@ class StartViewUi:
                     color = "black"
                 if coordinate == "x":
                     color = "green"
-                x1 = x*size
-                y1 = y*size
-                x2 = x1 + size
-                y2 = y1 + size
+                x1 = x*self._pixel_size
+                y1 = y*self._pixel_size
+                x2 = x1 + self._pixel_size
+                y2 = y1 + self._pixel_size
                 self.grid.create_rectangle((x1, y1, x2, y2), fill=color)
                 x += 1
         self.grid.pack()
