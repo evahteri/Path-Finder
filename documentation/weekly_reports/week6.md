@@ -5,11 +5,13 @@
 - Continue performance testing
 - More tests to make sure the right path is found
 - Trying other, different sized maps
+- Improvements on handling inputs
 
 ## Progress
 - GUI now allows to change between maps and shows them
 - Started working on making dijkstra work with bigger maps
 - Dijkstra now works with any map
+- IDA* now works with other maps
 
 ## Learning progress
 

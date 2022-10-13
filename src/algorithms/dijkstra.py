@@ -51,7 +51,6 @@ class Dijkstra():
         """Initializes neighbours for all nodes
         """
         map_size = self._map_size()
-        print(map_size)
         self.distance_matrix = [[999]*map_size for _ in range(map_size)]
         current_map = open(f"src/static/maps/{self.map}", "r")
         self.map = current_map.read().splitlines()

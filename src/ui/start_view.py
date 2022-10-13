@@ -157,7 +157,7 @@ class StartViewUi:
         self.grid.delete("all")
         start = self.start_coordinate_entry.get()
         goal = self.end_coordinate_entry.get()
-        distance_matrix = IdaStar().find_route(start=start, goal=goal)[0]
+        distance_matrix = IdaStar(self.current_map.get()).find_route(start=start, goal=goal)[0]
         map_size = 0
         for i in distance_matrix:
             map_size += 1

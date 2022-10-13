@@ -5,35 +5,44 @@ class IdaStar():
     """Class that includes all functions for ida star algorithm
     """
 
-    def __init__(self):
+    def __init__(self, map):
         """Constructor that creates all needed data structures and local values
         """
+        self.map = map
         self.graph = {}
         self.max_f_value = 25  # maximum cost of shortest path between nodes in the map
         self.threshold = None  # f score for the main function
         self.min_value = 999  # cost of shortest path, first a max value
-        self.distance_matrix = [[999]*10 for _ in range(10)]
+        self.distance_matrix = None
         self.distance = 0
+    
+    def _map_size(self):
+        size = 0
+        with open(f"src/static/maps/{self.map}") as current_map:
+            for i in current_map:
+                size += 1
+        return size
 
     def _initialize(self):
         """Creates the graph for the algorithm
         """
-        current_map = open("../Path_Finder/src/static/maps/map_1.txt", "r")
+        map_size = self._map_size()
+        self.distance_matrix = [[999]*map_size for _ in range(map_size)]
+        current_map = open(f"src/static/maps/{self.map}", "r")
         self.map = current_map.read().splitlines()
-        for y in range(10):
-            for x in range(10):
+        print(map_size)
+        for y in range(map_size):
+            for x in range(map_size):
                 self.graph[(x, y)] = []
-
         y_coordinate = 0
         for y in self.map:
             x_coordinate = 0
             for x in y:
                 if x != "@":
-
                     if x_coordinate != 0:
                         self.graph[(x_coordinate, y_coordinate)].append(
                             (x_coordinate-1, y_coordinate))
-                    if x_coordinate != 9:
+                    if x_coordinate != map_size - 1:
                         self.graph[(x_coordinate, y_coordinate)].append(
                             (x_coordinate+1, y_coordinate))
                         # Handle right neighbour
@@ -41,7 +50,7 @@ class IdaStar():
                         self.graph[(x_coordinate, y_coordinate)].append(
                             (x_coordinate, y_coordinate-1))
                         # Handle north neighbour
-                    if y_coordinate != 9:
+                    if y_coordinate != map_size - 1:
                         self.graph[(x_coordinate, y_coordinate)].append(
                             (x_coordinate, y_coordinate+1))
                         # Handle south neughbour
