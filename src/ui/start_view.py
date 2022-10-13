@@ -1,5 +1,5 @@
 import os
-from tkinter import constants, ttk, Canvas, StringVar
+from tkinter import constants, ttk, Canvas, StringVar, messagebox
 from algorithms.ida_star import IdaStar
 from algorithms.dijkstra import Dijkstra
 
@@ -13,8 +13,10 @@ class StartViewUi:
         self._root = root
         self._frame = None
         self.grid = Canvas(self._root, width=500, height=500)
-        self.start_coordinate = None
-        self.end_coordinate = None
+        self.start_x_coordinate = None
+        self.start_y_coordinate = None
+        self.end_x_coordinate = None
+        self.end_y_coordinate = None
         self.current_map = None
         self._pixel_size = None
         self.map_size = 0
@@ -37,21 +39,41 @@ class StartViewUi:
     def _base(self):
         self._frame = ttk.Frame(master=self._root)
 
-        start_coordinate_header = ttk.Label(
-            master=self._frame, text="Select start coordinate (for example: (0,0))")
-        self.start_coordinate_entry = ttk.Entry(
-            master=self._frame, textvariable=self.start_coordinate)
+        # start coordinate x
+        start_x_coordinate_header = ttk.Label(
+            master=self._frame, text="Select x coordinate for start")
+        self.start_coordinate_x_entry = ttk.Entry(
+            master=self._frame, textvariable=self.start_x_coordinate, width=5)
 
-        start_coordinate_header.grid(row=0, column=0)
-        self.start_coordinate_entry.grid(row=0, column=1)
+        start_x_coordinate_header.grid(row=0, column=0)
+        self.start_coordinate_x_entry.grid(row=0, column=1)
 
-        end_coordinate_header = ttk.Label(
-            master=self._frame, text="Select end coordinate (for example: (9,9))")
-        self.end_coordinate_entry = ttk.Entry(
-            master=self._frame, textvariable=self.end_coordinate)
+        # start coordinate y
+        start_y_coordinate_header = ttk.Label(
+            master=self._frame, text="Select y coordinate for start")
+        self.start_coordinate_y_entry = ttk.Entry(
+            master=self._frame, textvariable=self.start_y_coordinate, width=5)
 
-        end_coordinate_header.grid(row=2, column=0)
-        self.end_coordinate_entry.grid(row=2, column=1)
+        start_y_coordinate_header.grid(row=1, column=0)
+        self.start_coordinate_y_entry.grid(row=1, column=1)
+        # end coordinate x
+
+        end_x_coordinate_header = ttk.Label(
+            master=self._frame, text="Select x coordinate for end")
+        self.end_coordinate_x_entry = ttk.Entry(
+            master=self._frame, textvariable=self.end_x_coordinate, width=5)
+
+        end_x_coordinate_header.grid(row=2, column=0)
+        self.end_coordinate_x_entry.grid(row=2, column=1)
+
+        # end coordinate y
+        end_y_coordinate_header = ttk.Label(
+            master=self._frame, text="Select y coordinate for end")
+        self.end_coordinate_y_entry = ttk.Entry(
+            master=self._frame, textvariable=self.end_y_coordinate, width=5)
+
+        end_y_coordinate_header.grid(row=3, column=0)
+        self.end_coordinate_y_entry.grid(row=3, column=1)
 
         map_header = ttk.Label(master=self._frame, text="Select map")
         for file in os.listdir("src/static/maps"):
@@ -63,12 +85,12 @@ class StartViewUi:
         map_selection.grid(row=5, column=0)
 
         algo_header = ttk.Label(master=self._frame, text="Select algorithm")
-        algo_header.grid(row=7, column=0)
+        algo_header.grid(row=6, column=0)
 
         ida_star_button = ttk.Button(
             master=self._frame, text="IDA*", command=self._handle_ida_star
         )
-        ida_star_button.grid(row=8, column=0)
+        ida_star_button.grid(row=7, column=0)
 
         dijkstra_button = ttk.Button(
             master=self._frame, text="Dijkstra", command=self._handle_dijkstra
@@ -76,8 +98,8 @@ class StartViewUi:
         show_map_button = ttk.Button(
             master=self._frame, text="Show map", command=self._grid
         )
-        dijkstra_button.grid(row=9, column=0)
-        show_map_button.grid(row=10, column=0)
+        dijkstra_button.grid(row=8, column=0)
+        show_map_button.grid(row=9, column=0)
         
     def _get_map_size(self):
         size = 0
@@ -86,6 +108,29 @@ class StartViewUi:
             for row in current_map:
                 size += 1
         return size
+    
+    def _check_input(self, x_start, y_start, x_end, y_end):
+        map_size = self._get_map_size()
+        try:
+            if int(x_start) > map_size-1:
+                return False
+            if int(y_start) > map_size-1:
+                return False
+            if int(x_end) > map_size-1:
+                return False
+            if int(y_end) > map_size-1:
+                return False
+            if int(x_start) < 0:
+                return False
+            if int(y_start) < 0:
+                return False
+            if int(x_end) < 0:
+                return False
+            if int(y_end) < 0:
+                return False
+        except ValueError:
+            return False
+        return True
 
     def _grid(self):
         self.grid.delete("all")
@@ -117,9 +162,13 @@ class StartViewUi:
 
     def _handle_dijkstra(self):
         self.grid.delete("all")
-        start = self.start_coordinate_entry.get()
-        end = self.end_coordinate_entry.get()
-        distance_matrix = Dijkstra(self.current_map.get()).find_route(start=start, end=end)[0]
+        start_x = self.start_coordinate_x_entry.get()
+        start_y = self.start_coordinate_y_entry.get()
+        end_x = self.end_coordinate_x_entry.get()
+        end_y = self.end_coordinate_y_entry.get()
+        if not self._check_input(start_x, start_y, end_x, end_y):
+            return messagebox.showerror(title="Invalid input", message="Invalid input")
+        distance_matrix = Dijkstra(self.current_map.get()).find_route(int(start_x), int(start_y), int(end_x), int(end_y))[0]
         if distance_matrix == "incorrect input":
             return print("incorrect input")
         map_size = 0

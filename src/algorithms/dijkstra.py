@@ -81,7 +81,7 @@ class Dijkstra():
                 x_coordinate += 1
             y_coordinate += 1
 
-    def find_route(self, start, end):
+    def find_route(self, start_x, start_y, end_x, end_y):
         """The actual algorithm to find the fastest route between start and end node
 
         Args:
@@ -94,12 +94,6 @@ class Dijkstra():
         """
         start_time = datetime.datetime.now()
         self._initialize()
-        if not self._check_input(start, end):
-            return "incorrect input"
-        start_x = int(start[1])
-        start_y = int(start[3])
-        end_x = int(end[1])
-        end_y = int(end[3])
         self.distance_matrix[start_y][start_x] = 0
         self.heap.push([0, (start_x, start_y)])
         while self.heap.get_heap_len() != 0:
