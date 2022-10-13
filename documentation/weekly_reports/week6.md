@@ -8,6 +8,8 @@
 
 ## Progress
 - GUI now allows to change between maps and shows them
+- Started working on making dijkstra work with bigger maps
+- Dijkstra now works with any map
 
 ## Learning progress
 

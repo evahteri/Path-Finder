@@ -6,15 +6,15 @@ class Dijkstra():
     """Class responsible for the Djikstra algorithm to find shortest path
     """
 
-    def __init__(self):
+    def __init__(self, map):
         """Constructor that creates the distance matrix for the shortest distances and
         establishes all of the dictionaries and lists that the algorithm uses
         """
-        self.distance_matrix = [[999]*10 for _ in range(10)]
+        self.distance_matrix = None
         self.unvisited_nodes = []
         self.visited_nodes = []
         self.heap = Heap()
-        self.map = None
+        self.map = map
         self.neighbours = {}
         self.previous_node = {}
 
@@ -39,25 +39,33 @@ class Dijkstra():
         except IndexError:
             return False
         return True
+    
+    def _map_size(self):
+        size = 0
+        with open(f"src/static/maps/{self.map}") as current_map:
+            for i in current_map:
+                size += 1
+        return size
 
     def _initialize(self):
         """Initializes neighbours for all nodes
         """
-
-        current_map = open("../Path_Finder/src/static/maps/map_1.txt", "r")
+        map_size = self._map_size()
+        print(map_size)
+        self.distance_matrix = [[999]*map_size for _ in range(map_size)]
+        current_map = open(f"src/static/maps/{self.map}", "r")
         self.map = current_map.read().splitlines()
         y_coordinate = 0
         for y in self.map:
             x_coordinate = 0
             for x in y:
                 if x != "@":
-                    self.distance_matrix[y_coordinate][x_coordinate] = 999
                     self.neighbours[x_coordinate, y_coordinate] = []
                     self.unvisited_nodes.append((x_coordinate, y_coordinate))
                     if x_coordinate != 0:
                         self.neighbours[x_coordinate, y_coordinate].append(
                             (x_coordinate-1, y_coordinate))
-                    if x_coordinate != 9:
+                    if x_coordinate != map_size - 1:
                         self.neighbours[x_coordinate, y_coordinate].append(
                             (x_coordinate+1, y_coordinate))
                         # Handle right neighbour
@@ -65,7 +73,7 @@ class Dijkstra():
                         self.neighbours[x_coordinate, y_coordinate].append(
                             (x_coordinate, y_coordinate-1))
                         # Handle north neighbour
-                    if y_coordinate != 9:
+                    if y_coordinate != map_size - 1:
                         self.neighbours[x_coordinate, y_coordinate].append(
                             (x_coordinate, y_coordinate+1))
                         # Handle south neughbour

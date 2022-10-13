@@ -119,7 +119,7 @@ class StartViewUi:
         self.grid.delete("all")
         start = self.start_coordinate_entry.get()
         end = self.end_coordinate_entry.get()
-        distance_matrix = Dijkstra().find_route(start=start, end=end)[0]
+        distance_matrix = Dijkstra(self.current_map.get()).find_route(start=start, end=end)[0]
         if distance_matrix == "incorrect input":
             return print("incorrect input")
         map_size = 0
