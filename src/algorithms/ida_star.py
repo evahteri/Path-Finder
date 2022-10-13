@@ -60,7 +60,7 @@ class IdaStar():
                 x_coordinate += 1
             y_coordinate += 1
 
-    def find_route(self, start, goal):
+    def find_route(self, start_x, start_y, end_x, end_y):
         """Main function that uses infinite loop which calls search function to find fastest route
 
         Args:
@@ -72,8 +72,8 @@ class IdaStar():
         """
         start_time = datetime.datetime.now()
         self._initialize()
-        start_coordinate = (int(start[1]), int(start[3]))
-        goal_coordinate = (int(goal[1]), int(goal[3]))
+        start_coordinate = (start_x, start_y)
+        goal_coordinate = (end_x, end_y)
         self.distance_matrix[start_coordinate[1]
                              ][start_coordinate[0]] = "start"
         self.distance_matrix[goal_coordinate[1]][goal_coordinate[0]] = "end"

@@ -174,6 +174,7 @@ class StartViewUi:
         end_x = self.end_coordinate_x_entry.get()
         end_y = self.end_coordinate_y_entry.get()
         if not self._check_input(start_x, start_y, end_x, end_y):
+            self._grid()
             return messagebox.showerror(title="Invalid input", message="Invalid input")
         distance_matrix = Dijkstra(self.current_map.get()).find_route(int(start_x), int(start_y), int(end_x), int(end_y))[0]
         if distance_matrix == "incorrect input":
@@ -211,9 +212,14 @@ class StartViewUi:
 
     def _handle_ida_star(self):
         self.grid.delete("all")
-        start = self.start_coordinate_entry.get()
-        goal = self.end_coordinate_entry.get()
-        distance_matrix = IdaStar(self.current_map.get()).find_route(start=start, goal=goal)[0]
+        start_x = self.start_coordinate_x_entry.get()
+        start_y = self.start_coordinate_y_entry.get()
+        end_x = self.end_coordinate_x_entry.get()
+        end_y = self.end_coordinate_y_entry.get()
+        if not self._check_input(start_x, start_y, end_x, end_y):
+            self._grid()
+            return messagebox.showerror(title="Invalid input", message="Invalid input")
+        distance_matrix = IdaStar(self.current_map.get()).find_route(int(start_x), int(start_y), int(end_x), int(end_y))[0]
         map_size = 0
         for i in distance_matrix:
             map_size += 1
