@@ -1,4 +1,5 @@
 import os
+from re import X
 from tkinter import constants, ttk, Canvas, StringVar, messagebox
 from algorithms.ida_star import IdaStar
 from algorithms.dijkstra import Dijkstra
@@ -111,6 +112,8 @@ class StartViewUi:
     
     def _check_input(self, x_start, y_start, x_end, y_end):
         map_size = self._get_map_size()
+        current_map = open(f"src/static/maps/{self.current_map.get()}", "r")
+        map = current_map.read().splitlines()
         try:
             if int(x_start) > map_size-1:
                 return False
@@ -129,6 +132,10 @@ class StartViewUi:
             if int(y_end) < 0:
                 return False
         except ValueError:
+            return False
+        if map[int(y_start)][int(x_start)] == "@":
+            return False
+        if map[int(y_end)][int(x_end)] == "@":
             return False
         return True
 
