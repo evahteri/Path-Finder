@@ -17,28 +17,6 @@ class Dijkstra():
         self.map = map
         self.neighbours = {}
         self.previous_node = {}
-
-    def _check_input(self, start, end):
-        try:
-            if len(start) > 5:
-                return False
-            if len(end) > 5:
-                return False
-            if int(start[3]) > len(self.map) or int(start[3]) < 0:
-                return False
-            if int(start[1]) > len(self.map) or int(start[1]) < 0:
-                return False
-            if int(end[3]) > len(self.map) or int(end[3]) < 0:
-                return False
-            if int(end[1]) > len(self.map) or int(end[1]) < 0:
-                return False
-            if self.map[int(start[1])][int(start[3])] == "@":
-                return False
-            if self.map[int(end[1])][int(end[3])] == "@":
-                return False
-        except IndexError:
-            return False
-        return True
     
     def _map_size(self):
         size = 0
