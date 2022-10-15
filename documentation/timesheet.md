@@ -13,5 +13,5 @@
 | 13.10  | 4     | Continuing on multiple maps, trying to fix bugs        |
 | 15.10  | 3     | Fixing ida*                                            |
 | 15.10  | 2     | Creating performance tests                             |
-| 15.10  | 3     | Documentation                                          |
+| 15.10  | 4     | Documentation, tests, performance tests                |
 | Total  | 41    |                                                        |

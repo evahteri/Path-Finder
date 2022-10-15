@@ -16,6 +16,8 @@
 - Got IDA* working, the problem was that I added the map's "walls" to the graph. Most of this week's time spent figuring this out.
 - Made improved tests for the algorithms
 - Added documentation
+- Created separated services to check inputs and getting map size
+- Tests for said services
 
 
 ## Learning progress

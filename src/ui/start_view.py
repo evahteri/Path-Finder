@@ -230,4 +230,4 @@ class StartViewUi:
 
     def _handle_performance_small_map(self):
         result = PerformanceTest().test_performance_small_map()
-        return messagebox.showinfo(title="Results", message=f"100 calls made, {result[0]} was {result[2]}% faster! ({result[1]} seconds)!")
+        return messagebox.showinfo(title="Results", message=f"100 calls made, {result[0]} was {result[2]}% faster! ({result[1]} microseconds)!")
