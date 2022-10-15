@@ -263,4 +263,4 @@ class StartViewUi:
         self.grid.pack()
     
     def _handle_performance(self):
-        PerformanceTest().test_performance()
+        PerformanceTest().test_performance_small_map()
