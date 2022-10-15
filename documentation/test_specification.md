@@ -2,7 +2,7 @@
 
 ## Automatic testing
 
-Testing is done with pytest and currently tests if Dijkstra and IDA* finds fastest route through the map. Both tests are done with same input ((0,0) and (9,9)), from left upper corner to the lower right corner). Heap data structure's functions are tested each with their own tests. Tests can be run with command
+Testing is done with pytest and currently tests if Dijkstra and IDA* finds fastest route through the map. First, Dijkstra is tested with manually counted shortest paths, with different inputs. Now we can be sure that Dijkstra always finds the correct route. IDA* is tested with the help of Dijkstra; every output has to mach Dijkstra's output to make sure the route is correct.
 
 ```bash
 poetry run invoke test
@@ -18,7 +18,7 @@ This command creates a htmlcov folder, where you can find index.html. Copy it's 
 
 ## Empiric testing
 
-Routes are visualized in graphic user interface. Visited nodes (pixels) are yellow, fastest route is green and unvisited nodes stay white. Currentlty it is up to the user to decide if the result is correct by counting the fastest route manually. The app also prints the length of the shortest path.
+Routes are visualized in graphic user interface. Visited nodes (pixels) are yellow, fastest route is green and unvisited nodes stay white. The app also prints the length of the shortest path.
 
 ## Performance testing
 

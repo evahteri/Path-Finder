@@ -14,6 +14,7 @@
 - IDA* now works with other maps
 - Noticed that IDA* doesn't actually work with every input
 - Got IDA* working, the problem was that I added the map's "walls" to the graph. Most of this week's time spent figuring this out.
+- Made improved tests for the algorithms
 
 
 ## Learning progress
