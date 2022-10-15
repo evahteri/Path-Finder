@@ -9,4 +9,7 @@
 | 28.9.  | 2     | Started working on heap                                |
 | 29.9   | 3     | Finished heap, documentation                           |
 | 8.10   | 3     | Started performance testing                            |
-| Total  | 26    |                                                        |
+| 12.10. | 3     | Getting algorithms to work with multiple maps          |
+| 13.10  | 4     | Continuing on multiple maps, trying to fix bugs        |
+| 15.10  | 3     | Fixing ida*                                            |
+| Total  | 36    |                                                        |

@@ -12,6 +12,9 @@
 - Started working on making dijkstra work with bigger maps
 - Dijkstra now works with any map
 - IDA* now works with other maps
+- Noticed that IDA* doesn't actually work with every input
+- Got IDA* working, the problem was that I added the map's "walls" to the graph. Most of this week's time spent figuring this out.
+
 
 ## Learning progress
 
