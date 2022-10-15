@@ -39,10 +39,9 @@ class TestHeap(unittest.TestCase):
         self.heap.pop_smallest()
         heap_size = self.heap.get_heap_len()
         self.assertEqual(heap_size, 1)
-    
+
     def test_pop_with_empty_heap(self):
         """Tests if pop with empty heap returns None
         """
         smallest = self.heap.pop_smallest()
         self.assertEqual(None, smallest)
-        

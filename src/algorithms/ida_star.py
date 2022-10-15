@@ -102,7 +102,7 @@ class IdaStar():
                 # Return tuple with distance matrix and shortest path length
                 return (self.distance_matrix, self.distance)
             # If search function returns max int, any path isn't found
-            if new_threshold== float("inf"):
+            if new_threshold == float("inf"):
                 return False
             # Update threshold
             threshold = new_threshold

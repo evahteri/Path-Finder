@@ -7,6 +7,7 @@ from performance_tests.performance import PerformanceTest
 from services.map_helper import MapHelper
 from services.input_check import InputCheck
 
+
 class StartViewUi:
     """Class responsible for start view
 
@@ -110,7 +111,6 @@ class StartViewUi:
         )
         test_performance_button.grid(row=10, column=0)
 
-
     def _grid(self):
         self.grid.delete("all")
         map = self.current_map.get()
@@ -145,7 +145,7 @@ class StartViewUi:
         start_y = self.start_coordinate_y_entry.get()
         end_x = self.end_coordinate_x_entry.get()
         end_y = self.end_coordinate_y_entry.get()
-        if not InputCheck().check_input(current_map=self.current_map.get(),x_start=start_x, y_start=start_y, x_end=end_x,y_end=end_y):
+        if not InputCheck().check_input(current_map=self.current_map.get(), x_start=start_x, y_start=start_y, x_end=end_x, y_end=end_y):
             self._grid()
             return messagebox.showerror(title="Invalid input", message="Invalid input")
         distance_matrix = Dijkstra(self.current_map.get()).find_route(
@@ -187,7 +187,7 @@ class StartViewUi:
         start_y = self.start_coordinate_y_entry.get()
         end_x = self.end_coordinate_x_entry.get()
         end_y = self.end_coordinate_y_entry.get()
-        if not InputCheck().check_input(current_map=self.current_map.get(),x_start=start_x, y_start=start_y, x_end=end_x,y_end=end_y):
+        if not InputCheck().check_input(current_map=self.current_map.get(), x_start=start_x, y_start=start_y, x_end=end_x, y_end=end_y):
             self._grid()
             return messagebox.showerror(title="Invalid input", message="Invalid input")
         distance_matrix = IdaStar(self.current_map.get()).find_route(
@@ -227,8 +227,7 @@ class StartViewUi:
                 self.grid.create_rectangle((x1, y1, x2, y2), fill=color)
                 x += 1
         self.grid.pack()
-    
+
     def _handle_performance_small_map(self):
         result = PerformanceTest().test_performance_small_map()
         return messagebox.showinfo(title="Results", message=f"100 calls made, {result[0]} was {result[2]}% faster! ({result[1]} seconds)!")
-
