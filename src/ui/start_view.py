@@ -3,7 +3,7 @@ from re import X
 from tkinter import constants, ttk, Canvas, StringVar, messagebox
 from algorithms.ida_star import IdaStar
 from algorithms.dijkstra import Dijkstra
-
+from performance_tests.performance import PerformanceTest
 
 class StartViewUi:
     """Class responsible for start view
@@ -103,6 +103,11 @@ class StartViewUi:
         dijkstra_button.grid(row=8, column=0)
         show_map_button.grid(row=9, column=0)
 
+        test_performance_button = ttk.Button(
+            master=self._frame, text="Test performance", command=self._handle_performance
+        )
+        test_performance_button.grid(row=10, column=0)
+
     def _get_map_size(self):
         size = 0
         map = self.current_map.get()
@@ -134,6 +139,7 @@ class StartViewUi:
                 return False
         except ValueError:
             return False
+        print(map[int(y_start)][int(x_start)])
         if map[int(y_start)][int(x_start)] == "@":
             return False
         if map[int(y_end)][int(x_end)] == "@":
@@ -179,8 +185,6 @@ class StartViewUi:
             return messagebox.showerror(title="Invalid input", message="Invalid input")
         distance_matrix = Dijkstra(self.current_map.get()).find_route(
             int(start_x), int(start_y), int(end_x), int(end_y))[0]
-        if distance_matrix == "incorrect input":
-            return print("incorrect input")
         map_size = 0
         for i in distance_matrix:
             map_size += 1
@@ -256,3 +260,6 @@ class StartViewUi:
                 self.grid.create_rectangle((x1, y1, x2, y2), fill=color)
                 x += 1
         self.grid.pack()
+    
+    def _handle_performance(self):
+        PerformanceTest().test_performance()

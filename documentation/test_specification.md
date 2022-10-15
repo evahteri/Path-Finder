@@ -22,4 +22,4 @@ Routes are visualized in graphic user interface. Visited nodes (pixels) are yell
 
 ## Performance testing
 
-There are no automated performance tests. The program prints time spent getting the result to the terminal so user can inspect and compare these numbers together.
+Dijkstra's automated performance test can be run via gui.

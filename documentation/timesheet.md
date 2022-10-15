@@ -12,4 +12,5 @@
 | 12.10. | 3     | Getting algorithms to work with multiple maps          |
 | 13.10  | 4     | Continuing on multiple maps, trying to fix bugs        |
 | 15.10  | 3     | Fixing ida*                                            |
-| Total  | 36    |                                                        |
+| 15.10  | 2     | Creating performance tests                             |
+| Total  | 38    |                                                        |
