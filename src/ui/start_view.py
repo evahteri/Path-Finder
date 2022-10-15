@@ -139,10 +139,11 @@ class StartViewUi:
                 return False
         except ValueError:
             return False
-        print(map[int(y_start)][int(x_start)])
         if map[int(y_start)][int(x_start)] == "@":
             return False
         if map[int(y_end)][int(x_end)] == "@":
+            return False
+        if (x_start, y_start) == (x_end, y_end):
             return False
         return True
 
