@@ -82,7 +82,8 @@ class StartViewUi:
         map_header.grid(row=4, column=0)
 
         self.current_map = StringVar(master=self._frame)
-        map_selection = ttk.OptionMenu(self._frame, self.current_map, self.maps[0], *self.maps)
+        map_selection = ttk.OptionMenu(
+            self._frame, self.current_map, self.maps[0], *self.maps)
         map_selection.grid(row=5, column=0)
 
         algo_header = ttk.Label(master=self._frame, text="Select algorithm")
@@ -101,7 +102,7 @@ class StartViewUi:
         )
         dijkstra_button.grid(row=8, column=0)
         show_map_button.grid(row=9, column=0)
-        
+
     def _get_map_size(self):
         size = 0
         map = self.current_map.get()
@@ -109,7 +110,7 @@ class StartViewUi:
             for row in current_map:
                 size += 1
         return size
-    
+
     def _check_input(self, x_start, y_start, x_end, y_end):
         map_size = self._get_map_size()
         current_map = open(f"src/static/maps/{self.current_map.get()}", "r")
@@ -142,7 +143,7 @@ class StartViewUi:
     def _grid(self):
         self.grid.delete("all")
         map = self.current_map.get()
-        self.map_size= self._get_map_size()
+        self.map_size = self._get_map_size()
         self._pixel_size = 300 // self.map_size
         with open(f"src/static/maps/{map}") as current_map:
             y_coordinate = 0
@@ -176,7 +177,8 @@ class StartViewUi:
         if not self._check_input(start_x, start_y, end_x, end_y):
             self._grid()
             return messagebox.showerror(title="Invalid input", message="Invalid input")
-        distance_matrix = Dijkstra(self.current_map.get()).find_route(int(start_x), int(start_y), int(end_x), int(end_y))[0]
+        distance_matrix = Dijkstra(self.current_map.get()).find_route(
+            int(start_x), int(start_y), int(end_x), int(end_y))[0]
         if distance_matrix == "incorrect input":
             return print("incorrect input")
         map_size = 0
@@ -217,7 +219,8 @@ class StartViewUi:
         end_x = self.end_coordinate_x_entry.get()
         end_y = self.end_coordinate_y_entry.get()
 
-        distance_matrix = IdaStar(self.current_map.get()).find_route(int(start_x), int(start_y), int(end_x), int(end_y))
+        distance_matrix = IdaStar(self.current_map.get()).find_route(
+            int(start_x), int(start_y), int(end_x), int(end_y))
         if distance_matrix:
             distance_matrix = distance_matrix[0]
         else:

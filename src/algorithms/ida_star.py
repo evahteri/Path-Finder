@@ -10,13 +10,10 @@ class IdaStar():
         """
         self.map = map
         self.graph = {}
-        self.max_f_value = 999  # maximum cost of shortest path between nodes in the map
-        self.threshold = None  # f score for the main function
-        self.min_value = 999  # cost of shortest path, first a max value
         self.distance_matrix = None
         self.distance = 0
         self.path = []
-    
+
     def _map_size(self):
         """Function to get size of current map
 
@@ -86,10 +83,10 @@ class IdaStar():
                              ][start_coordinate[0]] = "start"
         self.distance_matrix[goal_coordinate[1]][goal_coordinate[0]] = "end"
         # f score is cost of current node x and heuristic of the node x
-        self.threshold = self._heuristic(start_coordinate, goal_coordinate)
+        threshold = self._heuristic(start_coordinate, goal_coordinate)
         while True:
             found_path = self._search(
-                node=start_coordinate, g=0, threshold=self.threshold, goal=goal_coordinate) 
+                node=start_coordinate, g=0, threshold=threshold, goal=goal_coordinate)
             if found_path == "found":
                 self.distance_matrix[start_coordinate[1]
                                      ][start_coordinate[0]] = "start"
@@ -99,9 +96,9 @@ class IdaStar():
                 finish_time = datetime.datetime.now()
                 print(f" IDA* found route found in {finish_time-start_time}")
                 return (self.distance_matrix, self.distance)
-            if found_path > self.max_f_value:
+            if found_path == float("inf"):
                 return False
-            self.threshold = found_path
+            threshold = found_path
 
     def _search(self, node, g, threshold, goal):
         """Iterative search function
@@ -120,7 +117,7 @@ class IdaStar():
             return f
         if node == goal:
             return "found"
-        self.min_value = 99999
+        min_value = float("inf")
         for neighbour in self.graph[node]:
             if neighbour not in self.path:
                 self.path.append(neighbour)
@@ -131,10 +128,10 @@ class IdaStar():
                     self.distance_matrix[node[1]][node[0]] = "x"
                     self.distance += 1
                     return "found"
-                if search_result < self.min_value:
-                    self.min_value = search_result
+                if search_result < min_value:
+                    min_value = search_result
                 self.path.pop()
-        return self.min_value
+        return min_value
 
     def _heuristic(self, start, goal):
         """Heuristic function for the algorithm

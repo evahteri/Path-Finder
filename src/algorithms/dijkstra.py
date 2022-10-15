@@ -17,7 +17,7 @@ class Dijkstra():
         self.map = map
         self.neighbours = {}
         self.previous_node = {}
-    
+
     def _map_size(self):
         size = 0
         with open(f"src/static/maps/{self.map}") as current_map:
