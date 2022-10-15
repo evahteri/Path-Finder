@@ -37,7 +37,9 @@ class Heap:
             this way the cost is the decifing factor building the heap.
             Accessing node's cost: node[0]
         """
+        # Add new node to the heap list
         self._heap.append(node)
+        # Get last position
         position = len(self._heap) - 1
         # Looping until found the right position
         parent_position = position // 2
@@ -50,10 +52,13 @@ class Heap:
         """Function to return minimun node from heap. Min node is in position 1.
         It will adjust the binary tree after every pop.
         """
+        # If heap is empty, nothing to return
         if self.get_heap_len() == 0:
             return None
+        # If heap includes only one object, return that
         if self.get_heap_len() == 1:
             return self._heap.pop()
+        # Fetch min and max node
         min_node = self._heap[1]
         max_node = self._heap.pop()
         # Set max node as root node
@@ -77,5 +82,5 @@ class Heap:
             self._swap(position, smallest_child_position)
             position = smallest_child_position
             left__child_position = 2 * smallest_child_position
-
+        # Return the smallest node
         return min_node

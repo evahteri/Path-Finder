@@ -1,4 +1,4 @@
-# Week 4
+# Week 6
 
 ## Plan
 - Improve some of the things that was mentioned in peer review
@@ -15,6 +15,7 @@
 - Noticed that IDA* doesn't actually work with every input
 - Got IDA* working, the problem was that I added the map's "walls" to the graph. Most of this week's time spent figuring this out.
 - Made improved tests for the algorithms
+- Added documentation
 
 
 ## Learning progress

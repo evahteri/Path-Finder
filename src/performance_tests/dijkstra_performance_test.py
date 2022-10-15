@@ -3,6 +3,8 @@ from random import randint
 from algorithms.dijkstra import Dijkstra
 
 class Dijkstra_Performance():
+    """Class responsible for testing Dijkstra's performance
+    """
 
     def __init__(self):
         pass

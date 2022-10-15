@@ -3,6 +3,8 @@ from random import randint
 from algorithms.ida_star import IdaStar
 
 class IdaStar_Performance():
+    """Class responsible for testing IDA*'s performance
+    """
 
     def __init__(self):
         pass

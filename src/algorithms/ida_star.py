@@ -74,31 +74,38 @@ class IdaStar():
         Returns:
             Matrix: distance matrix that has the fastest route and visited nodes marked
         """
+        # Save current time for counting time spent
         start_time = datetime.datetime.now()
+        # Add start node to current path
         self.path = [(start_x, start_y)]
+        # Initialize graph
         self._initialize()
         start_coordinate = (start_x, start_y)
         goal_coordinate = (end_x, end_y)
-        self.distance_matrix[start_coordinate[1]
-                             ][start_coordinate[0]] = "start"
-        self.distance_matrix[goal_coordinate[1]][goal_coordinate[0]] = "end"
-        # f score is cost of current node x and heuristic of the node x
+        # Count threshold a.k.a. f score. Call heuristic function to get manhattan distance
         threshold = self._heuristic(start_coordinate, goal_coordinate)
         while True:
-            found_path = self._search(
+            # Call search function, g score is 0
+            new_threshold = self._search(
                 node=start_coordinate, g=0, threshold=threshold, goal=goal_coordinate)
-            if found_path == "found":
+            # If path is found,
+            if new_threshold == "found":
+                # Mark start and end nodes to the distance matrix
                 self.distance_matrix[start_coordinate[1]
                                      ][start_coordinate[0]] = "start"
                 self.distance_matrix[goal_coordinate[1]
                                      ][goal_coordinate[0]] = "end"
                 print(f"Shortest path length is {self.distance}")
+                # "Stop the clock" to get time spent fetching path
                 finish_time = datetime.datetime.now()
                 print(f" IDA* found route found in {finish_time-start_time}")
+                # Return tuple with distance matrix and shortest path length
                 return (self.distance_matrix, self.distance)
-            if found_path == float("inf"):
+            # If search function returns max int, any path isn't found
+            if new_threshold== float("inf"):
                 return False
-            threshold = found_path
+            # Update threshold
+            threshold = new_threshold
 
     def _search(self, node, g, threshold, goal):
         """Iterative search function
@@ -112,24 +119,36 @@ class IdaStar():
         Returns:
             if path is found: "found" string, if not found: minimum value for the fastest route
         """
+        # New f score is g score plus heuristic to the goal node from current node
         f = g + self._heuristic(node, goal)
+        # If f score is bigger than threshold, return f score
         if f > threshold:
             return f
+        # If node is goal, the path is found
         if node == goal:
             return "found"
+        # Set min value to maximum integer
         min_value = float("inf")
+        # Go trough node's neighbours
         for neighbour in self.graph[node]:
+            # If the neighbour is not in current path, add it there
             if neighbour not in self.path:
                 self.path.append(neighbour)
+                # Mark neighbour as "visited" for ui
                 self.distance_matrix[neighbour[1]][neighbour[0]] = 1
-                # recursive call for nodes neighbours, g+1 is the cost to travel to that node
+                # Recursive call for nodes neighbours, g+1 is the cost to travel to that node
                 search_result = self._search(neighbour, g+1, threshold, goal)
+                # If call returns found, shortest path is found
                 if search_result == "found":
+                    # Mark current node to correct route
                     self.distance_matrix[node[1]][node[0]] = "x"
+                    # Update shortest distance counter
                     self.distance += 1
                     return "found"
+                # Update minimun value to improve estimate
                 if search_result < min_value:
                     min_value = search_result
+                # Remove node from current path
                 self.path.pop()
         return min_value
 
@@ -144,10 +163,6 @@ class IdaStar():
             int: Manhattan distance between start and goal node
         """
 
-        x_distance = start[0] - goal[0]
-        y_distance = start[1] - goal[1]
-        if x_distance < 0:
-            x_distance = x_distance * (-1)
-        if y_distance < 0:
-            y_distance = y_distance * (-1)
+        x_distance = abs(start[0] - goal[0])
+        y_distance = abs(start[1] - goal[1])
         return x_distance + y_distance
