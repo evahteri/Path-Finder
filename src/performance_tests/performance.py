@@ -17,10 +17,12 @@ class PerformanceTest():
         ida_star_time = IdaStar_Performance().test_ida_star_100_times_small_map()
         print(f"Dijkstra found 100 routes in 10x10 map in {dijkstra_time} seconds")
         print(f"IDA* found 100 routes in 10x10 map in {ida_star_time} seconds")
-        difference = abs(dijkstra_time - ida_star_time)
+        difference_time = abs(dijkstra_time - ida_star_time)
         if dijkstra_time > ida_star_time:
-            print(f"IDA* star was faster by {difference}")
-            return ("IDA*", difference)
+            difference_percentage = round((difference_time / dijkstra_time * 100),2)
+            print(f"IDA* star was faster by {difference_time.seconds}s, {difference_percentage} %")
+            return ("IDA*", difference_time.seconds, difference_percentage)
         else:
-            print(f"Dijkstra star was faster by {difference}")
-            return ("Dijkstra", difference)
+            difference_percentage = round((difference_time / ida_star_time * 100), 2)
+            print(f"Dijkstra star was faster by {difference_time.seconds}s, {difference_percentage}")
+            return ("Dijkstra", difference_time.seconds, difference_percentage)
