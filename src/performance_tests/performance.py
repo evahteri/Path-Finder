@@ -19,6 +19,8 @@ class PerformanceTest():
         print(f"IDA* found 100 routes in 10x10 map in {ida_star_time} seconds")
         difference = abs(dijkstra_time - ida_star_time)
         if dijkstra_time > ida_star_time:
-            print(f"IDA* star was faster by {difference} seconds")
+            print(f"IDA* star was faster by {difference}")
+            return ("IDA*", difference)
         else:
-            print(f"Dijkstra star was faster by {difference} seconds")
+            print(f"Dijkstra star was faster by {difference}")
+            return ("Dijkstra", difference)

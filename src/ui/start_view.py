@@ -4,6 +4,8 @@ from tkinter import constants, ttk, Canvas, StringVar, messagebox
 from algorithms.ida_star import IdaStar
 from algorithms.dijkstra import Dijkstra
 from performance_tests.performance import PerformanceTest
+from services.map_helper import MapHelper
+from services.input_check import InputCheck
 
 class StartViewUi:
     """Class responsible for start view
@@ -104,53 +106,15 @@ class StartViewUi:
         show_map_button.grid(row=9, column=0)
 
         test_performance_button = ttk.Button(
-            master=self._frame, text="Test performance", command=self._handle_performance
+            master=self._frame, text="Test performance with 10X10 map", command=self._handle_performance_small_map
         )
         test_performance_button.grid(row=10, column=0)
 
-    def _get_map_size(self):
-        size = 0
-        map = self.current_map.get()
-        with open(f"src/static/maps/{map}") as current_map:
-            for row in current_map:
-                size += 1
-        return size
-
-    def _check_input(self, x_start, y_start, x_end, y_end):
-        map_size = self._get_map_size()
-        current_map = open(f"src/static/maps/{self.current_map.get()}", "r")
-        map = current_map.read().splitlines()
-        try:
-            if int(x_start) > map_size-1:
-                return False
-            if int(y_start) > map_size-1:
-                return False
-            if int(x_end) > map_size-1:
-                return False
-            if int(y_end) > map_size-1:
-                return False
-            if int(x_start) < 0:
-                return False
-            if int(y_start) < 0:
-                return False
-            if int(x_end) < 0:
-                return False
-            if int(y_end) < 0:
-                return False
-        except ValueError:
-            return False
-        if map[int(y_start)][int(x_start)] == "@":
-            return False
-        if map[int(y_end)][int(x_end)] == "@":
-            return False
-        if (x_start, y_start) == (x_end, y_end):
-            return False
-        return True
 
     def _grid(self):
         self.grid.delete("all")
         map = self.current_map.get()
-        self.map_size = self._get_map_size()
+        self.map_size = MapHelper(map).get_map_size()
         self._pixel_size = 300 // self.map_size
         with open(f"src/static/maps/{map}") as current_map:
             y_coordinate = 0
@@ -181,7 +145,7 @@ class StartViewUi:
         start_y = self.start_coordinate_y_entry.get()
         end_x = self.end_coordinate_x_entry.get()
         end_y = self.end_coordinate_y_entry.get()
-        if not self._check_input(start_x, start_y, end_x, end_y):
+        if not InputCheck().check_input(current_map=self.current_map.get(),x_start=start_x, y_start=start_y, x_end=end_x,y_end=end_y):
             self._grid()
             return messagebox.showerror(title="Invalid input", message="Invalid input")
         distance_matrix = Dijkstra(self.current_map.get()).find_route(
@@ -223,7 +187,9 @@ class StartViewUi:
         start_y = self.start_coordinate_y_entry.get()
         end_x = self.end_coordinate_x_entry.get()
         end_y = self.end_coordinate_y_entry.get()
-
+        if not InputCheck().check_input(current_map=self.current_map.get(),x_start=start_x, y_start=start_y, x_end=end_x,y_end=end_y):
+            self._grid()
+            return messagebox.showerror(title="Invalid input", message="Invalid input")
         distance_matrix = IdaStar(self.current_map.get()).find_route(
             int(start_x), int(start_y), int(end_x), int(end_y))
         if distance_matrix:
@@ -262,5 +228,7 @@ class StartViewUi:
                 x += 1
         self.grid.pack()
     
-    def _handle_performance(self):
-        PerformanceTest().test_performance_small_map()
+    def _handle_performance_small_map(self):
+        result = PerformanceTest().test_performance_small_map()
+        return messagebox.showinfo(title="Results", message=f"100 calls made, {result[0]} was faster by {result[1]}!")
+
