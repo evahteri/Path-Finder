@@ -216,10 +216,13 @@ class StartViewUi:
         start_y = self.start_coordinate_y_entry.get()
         end_x = self.end_coordinate_x_entry.get()
         end_y = self.end_coordinate_y_entry.get()
-        if not self._check_input(start_x, start_y, end_x, end_y):
+
+        distance_matrix = IdaStar(self.current_map.get()).find_route(int(start_x), int(start_y), int(end_x), int(end_y))
+        if distance_matrix:
+            distance_matrix = distance_matrix[0]
+        else:
             self._grid()
-            return messagebox.showerror(title="Invalid input", message="Invalid input")
-        distance_matrix = IdaStar(self.current_map.get()).find_route(int(start_x), int(start_y), int(end_x), int(end_y))[0]
+            return messagebox.showerror(title="No path found", message="IDA* could not find any path to goal node.")
         map_size = 0
         for i in distance_matrix:
             map_size += 1

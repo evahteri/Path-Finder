@@ -10,13 +10,19 @@ class IdaStar():
         """
         self.map = map
         self.graph = {}
-        self.max_f_value = 25  # maximum cost of shortest path between nodes in the map
+        self.max_f_value = 999  # maximum cost of shortest path between nodes in the map
         self.threshold = None  # f score for the main function
         self.min_value = 999  # cost of shortest path, first a max value
         self.distance_matrix = None
         self.distance = 0
+        self.path = []
     
     def _map_size(self):
+        """Function to get size of current map
+
+        Returns:
+            int: Size of current map
+        """
         size = 0
         with open(f"src/static/maps/{self.map}") as current_map:
             for i in current_map:
@@ -27,35 +33,38 @@ class IdaStar():
         """Creates the graph for the algorithm
         """
         map_size = self._map_size()
+        # Create matrix, first with max distances to every node
         self.distance_matrix = [[999]*map_size for _ in range(map_size)]
         current_map = open(f"src/static/maps/{self.map}", "r")
         self.map = current_map.read().splitlines()
-        print(map_size)
+        # Create a graph. The graph is a python dictionary with coordinates as keys and neighbours in a list
         for y in range(map_size):
             for x in range(map_size):
                 self.graph[(x, y)] = []
+        # Next add every neighbour to the graph
         y_coordinate = 0
         for y in self.map:
             x_coordinate = 0
             for x in y:
                 if x != "@":
-                    if x_coordinate != 0:
+                    # Handle left neighbour
+                    if x_coordinate != 0 and self.map[y_coordinate][x_coordinate-1] != "@":
                         self.graph[(x_coordinate, y_coordinate)].append(
                             (x_coordinate-1, y_coordinate))
-                    if x_coordinate != map_size - 1:
+                    # Handle right neighbour
+                    if x_coordinate != map_size - 1 and self.map[y_coordinate][x_coordinate+1] != "@":
                         self.graph[(x_coordinate, y_coordinate)].append(
                             (x_coordinate+1, y_coordinate))
-                        # Handle right neighbour
-                    if y_coordinate != 0:
+                    # Handle upper neighbour
+                    if y_coordinate != 0 and self.map[y_coordinate-1][x_coordinate] != "@":
                         self.graph[(x_coordinate, y_coordinate)].append(
                             (x_coordinate, y_coordinate-1))
-                        # Handle north neighbour
-                    if y_coordinate != map_size - 1:
+                    # Handle lower neighbour
+                    if y_coordinate != map_size - 1 and self.map[y_coordinate+1][x_coordinate] != "@":
                         self.graph[(x_coordinate, y_coordinate)].append(
                             (x_coordinate, y_coordinate+1))
-                        # Handle south neughbour
                 if x == "@":
-                    self.graph[(x_coordinate, y_coordinate)] = "@"
+                    # Mark walls to the distance matrix
                     self.distance_matrix[y_coordinate][x_coordinate] = "@"
                 x_coordinate += 1
             y_coordinate += 1
@@ -63,14 +72,13 @@ class IdaStar():
     def find_route(self, start_x, start_y, end_x, end_y):
         """Main function that uses infinite loop which calls search function to find fastest route
 
-        Args:
-            start (tuple): start node from gui
-            goal (tuple): goal node from gui
+        Args: Four integers as a coordinates for start and goal nodes
 
         Returns:
-            matrix: distance matrix that has the fastest route and visited nodes marked
+            Matrix: distance matrix that has the fastest route and visited nodes marked
         """
         start_time = datetime.datetime.now()
+        self.path = [(start_x, start_y)]
         self._initialize()
         start_coordinate = (start_x, start_y)
         goal_coordinate = (end_x, end_y)
@@ -81,7 +89,7 @@ class IdaStar():
         self.threshold = self._heuristic(start_coordinate, goal_coordinate)
         while True:
             found_path = self._search(
-                node=start_coordinate, g=0, threshold=self.threshold, goal=goal_coordinate)
+                node=start_coordinate, g=0, threshold=self.threshold, goal=goal_coordinate) 
             if found_path == "found":
                 self.distance_matrix[start_coordinate[1]
                                      ][start_coordinate[0]] = "start"
@@ -108,23 +116,24 @@ class IdaStar():
             if path is found: "found" string, if not found: minimum value for the fastest route
         """
         f = g + self._heuristic(node, goal)
-        if f > self.threshold:
+        if f > threshold:
             return f
         if node == goal:
             return "found"
+        self.min_value = 99999
         for neighbour in self.graph[node]:
-            if neighbour == "@":
-                continue
-            if self.distance_matrix[neighbour[1]][neighbour[0]] != "@":
+            if neighbour not in self.path:
+                self.path.append(neighbour)
                 self.distance_matrix[neighbour[1]][neighbour[0]] = 1
-            # recursive call for nodes neighbours, g+1 is the cost to travel to that node
-            search_result = self._search(neighbour, g+1, threshold, goal)
-            if search_result == "found":
-                self.distance_matrix[node[1]][node[0]] = "x"
-                self.distance += 1
-                return "found"
-            if search_result < self.min_value:
-                self.min_value = search_result
+                # recursive call for nodes neighbours, g+1 is the cost to travel to that node
+                search_result = self._search(neighbour, g+1, threshold, goal)
+                if search_result == "found":
+                    self.distance_matrix[node[1]][node[0]] = "x"
+                    self.distance += 1
+                    return "found"
+                if search_result < self.min_value:
+                    self.min_value = search_result
+                self.path.pop()
         return self.min_value
 
     def _heuristic(self, start, goal):
