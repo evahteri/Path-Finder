@@ -116,6 +116,11 @@ class StartViewUi:
         )
         test_performance_15x15_map_button.grid(row=11, column=0)
 
+        test_performance_30x30_map_button = ttk.Button(
+            master=self._frame, text="Test performance with 30X30 map", command=self._handle_performance_30x30_map
+        )
+        test_performance_30x30_map_button.grid(row=12, column=0)
+
     def _grid(self):
         self.grid.delete("all")
         map = self.current_map.get()
@@ -240,5 +245,10 @@ class StartViewUi:
     
     def _handle_performance_15x15_map(self):
         result = PerformanceTest().test_performance_15x15_map()
+        return messagebox.showinfo(title="Results", message=f"100 calls made, {result[0]} was \
+        {result[2]}% faster! ({result[1]} microseconds)!")
+
+    def _handle_performance_30x30_map(self):
+        result = PerformanceTest().test_performance_30x30_map()
         return messagebox.showinfo(title="Results", message=f"100 calls made, {result[0]} was \
         {result[2]}% faster! ({result[1]} microseconds)!")
