@@ -1,6 +1,7 @@
 from performance_tests import ida_star_performance_test
 from performance_tests.dijkstra_performance_test import Dijkstra_Performance
 from performance_tests.ida_star_performance_test import IdaStar_Performance
+from performance_tests.heap_performance_test import Heap_Performance
 
 
 class PerformanceTest():
@@ -9,6 +10,15 @@ class PerformanceTest():
 
     def __init__(self):
         pass
+
+    def test_heap_performance(self):
+        """Tests heap with 1000 push and pop calls, comparing results to Python's own heapq heap.
+        """
+        own_heap_time = Heap_Performance().test_own_heap_push_and_pop_1000_times()
+        python_heap_time = Heap_Performance().test_python_heap_push_and_pop_1000_times()
+        print(f"My heap did 1000 push and pop functions in {own_heap_time.microseconds} microseconds. \
+            Python's heapq did the same in {python_heap_time.microseconds} microseconds.")
+        return (own_heap_time, python_heap_time)
 
     def test_performance_10x10_map(self):
         """Tests 100 random routes through 10x10 map with walls.

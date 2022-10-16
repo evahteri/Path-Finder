@@ -126,6 +126,11 @@ class StartViewUi:
         )
         test_performance_50x50_map_button.grid(row=13, column=0)
 
+        test_performance_heap_button = ttk.Button(
+            master=self._frame, text="Test heap performance with 1000 push and pop calls", command=self._handle_performance_heap
+        )
+        test_performance_heap_button.grid(row=15, column=0)
+
     def _grid(self):
         self.grid.delete("all")
         map = self.current_map.get()
@@ -262,3 +267,7 @@ class StartViewUi:
         result = PerformanceTest().test_performance_50x50_map()
         return messagebox.showinfo(title="Results", message=f"10 calls made, {result[0]} was \
         {result[2]}% faster! ({result[1]} microseconds)!")
+    
+    def _handle_performance_heap(self):
+        result = PerformanceTest().test_heap_performance()
+        return messagebox.showinfo(title="Results", message=f"My heap did 1000 push and pop operations in {result[0].microseconds} microseconds. Python's heapq did the same in {result[1].microseconds} microseconds.")
