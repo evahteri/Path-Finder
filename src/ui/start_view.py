@@ -106,10 +106,15 @@ class StartViewUi:
         dijkstra_button.grid(row=8, column=0)
         show_map_button.grid(row=9, column=0)
 
-        test_performance_button = ttk.Button(
-            master=self._frame, text="Test performance with 10X10 map", command=self._handle_performance_small_map
+        test_performance_10x10_map_button = ttk.Button(
+            master=self._frame, text="Test performance with 10X10 map", command=self._handle_performance_10x10_map
         )
-        test_performance_button.grid(row=10, column=0)
+        test_performance_10x10_map_button.grid(row=10, column=0)
+
+        test_performance_15x15_map_button = ttk.Button(
+            master=self._frame, text="Test performance with 15X15 map", command=self._handle_performance_15x15_map
+        )
+        test_performance_15x15_map_button.grid(row=11, column=0)
 
     def _grid(self):
         self.grid.delete("all")
@@ -228,6 +233,12 @@ class StartViewUi:
                 x += 1
         self.grid.pack()
 
-    def _handle_performance_small_map(self):
-        result = PerformanceTest().test_performance_small_map()
-        return messagebox.showinfo(title="Results", message=f"100 calls made, {result[0]} was {result[2]}% faster! ({result[1]} microseconds)!")
+    def _handle_performance_10x10_map(self):
+        result = PerformanceTest().test_performance_10x10_map()
+        return messagebox.showinfo(title="Results", message=f"100 calls made, {result[0]} was \
+        {result[2]}% faster! ({result[1]} microseconds)!")
+    
+    def _handle_performance_15x15_map(self):
+        result = PerformanceTest().test_performance_15x15_map()
+        return messagebox.showinfo(title="Results", message=f"100 calls made, {result[0]} was \
+        {result[2]}% faster! ({result[1]} microseconds)!")

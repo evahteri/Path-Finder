@@ -18,6 +18,7 @@
 - Added documentation
 - Created separated services to check inputs and getting map size
 - Tests for said services
+- Made performance tests with different sized maps 
 
 
 ## Learning progress

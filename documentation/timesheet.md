@@ -14,4 +14,5 @@
 | 15.10  | 3     | Fixing ida*                                            |
 | 15.10  | 2     | Creating performance tests                             |
 | 15.10  | 4     | Documentation, tests, performance tests                |
-| Total  | 41    |                                                        |
+| 16.10  | 2     | Performance tests                                      |
+| Total  | 43    |                                                        |

@@ -11,7 +11,7 @@ class IdaStar_Performance():
     def __init__(self):
         pass
 
-    def test_ida_star_100_times_small_map(self):
+    def test_ida_star_100_times_10x10_map(self):
         """Paths are fetched 100 times in 10x10 sized map (map_1.txt)
         """
         start_time = datetime.datetime.now()
@@ -26,7 +26,7 @@ class IdaStar_Performance():
         finish_time = datetime.datetime.now()
         return finish_time-start_time
     
-    def test_ida_star_100_times_medium_map(self):
+    def test_ida_star_100_times_15x15_map(self):
         """Paths are fetched 100 times in 15x15 sized map (map_2.txt)
         """
         start_time = datetime.datetime.now()
