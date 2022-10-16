@@ -72,3 +72,24 @@ class PerformanceTest():
             print(
                 f"Dijkstra star was faster by {difference_time.microseconds} microseconds, {difference_percentage}")
             return ("Dijkstra", difference_time.microseconds, difference_percentage)
+
+    def test_performance_50x50_map(self):
+        dijkstra_time = Dijkstra_Performance().test_dijkstra_10_times_50x50_map()
+        ida_star_time = IdaStar_Performance().test_ida_star_10_times_50x50_map()
+        print(
+            f"Dijkstra found 100 routes in 50x50 map in {dijkstra_time.microseconds} microseconds")
+        print(f"IDA* found 100 routes in 50x50 map in {ida_star_time.microseconds} microseconds")
+        difference_time = abs(dijkstra_time - ida_star_time)
+        if dijkstra_time > ida_star_time:
+            difference_percentage = round(
+                (difference_time / dijkstra_time * 100), 2)
+            print(
+                f"IDA* star was faster by {difference_time.microseconds} microseconds, {difference_percentage} %")
+            return ("IDA*", difference_time.microseconds, difference_percentage)
+        else:
+            difference_percentage = round(
+                (difference_time / ida_star_time * 100), 2)
+            print(
+                f"Dijkstra star was faster by {difference_time.microseconds} microseconds, {difference_percentage}")
+            return ("Dijkstra", difference_time.microseconds, difference_percentage)
+
