@@ -42,19 +42,19 @@ class Dijkstra():
                     # Mark every node as unvisited
                     self.unvisited_nodes.append((x_coordinate, y_coordinate))
                     # Handle left neighbour
-                    if x_coordinate != 0:
+                    if x_coordinate != 0 and self.map[y_coordinate][x_coordinate-1] != "@":
                         self.neighbours[x_coordinate, y_coordinate].append(
                             (x_coordinate-1, y_coordinate))
                     # Handle right neighour
-                    if x_coordinate != map_size - 1:
+                    if x_coordinate != map_size - 1 and self.map[y_coordinate][x_coordinate+1] != "@":
                         self.neighbours[x_coordinate, y_coordinate].append(
                             (x_coordinate+1, y_coordinate))
                     # Handle upper neighbour
-                    if y_coordinate != 0:
+                    if y_coordinate != 0 and self.map[y_coordinate-1][x_coordinate] != "@":
                         self.neighbours[x_coordinate, y_coordinate].append(
                             (x_coordinate, y_coordinate-1))
                     # Handle lower neighbour
-                    if y_coordinate != map_size - 1:
+                    if y_coordinate != map_size - 1 and self.map[y_coordinate+1][x_coordinate] != "@":
                         self.neighbours[x_coordinate, y_coordinate].append(
                             (x_coordinate, y_coordinate+1))
                 # If coordinate is a wall, mark it
@@ -105,9 +105,6 @@ class Dijkstra():
                 now = self.distance_matrix[y_neighbour][x_neighbour]
                 # New distance
                 new = self.distance_matrix[y_node][x_node] + 1
-                # If neighbour is a wall, ignore
-                if now == "@":
-                    continue
                 # If new distance is lower than old, update it
                 if new < now:
                     self.distance_matrix[y_neighbour][x_neighbour] = new
