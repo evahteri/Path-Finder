@@ -131,5 +131,5 @@ class Dijkstra():
         # Get current time to "stop the clock" and save time spent getting route
         finish_time = datetime.datetime.now()
         print(f"Dijkstra found route in {finish_time-start_time}")
-        # Return tuple with distance matrix and shortest path length
-        return (self.distance_matrix, distance)
+        # Return tuple with distance matrix and shortest path length and finish time
+        return (self.distance_matrix, distance, finish_time)

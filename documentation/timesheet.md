@@ -15,4 +15,5 @@
 | 15.10  | 2     | Creating performance tests                             |
 | 15.10  | 4     | Documentation, tests, performance tests                |
 | 16.10  | 2     | Performance tests                                      |
-| Total  | 43    |                                                        |
+| 20.10  | 3     | Documentation, finishing touches                       |
+| Total  | 46    |                                                        |

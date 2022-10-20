@@ -1,8 +1,11 @@
+import matplotlib.pyplot as plt
 from performance_tests import ida_star_performance_test
 from performance_tests.dijkstra_performance_test import Dijkstra_Performance
 from performance_tests.ida_star_performance_test import IdaStar_Performance
 from performance_tests.heap_performance_test import Heap_Performance
-
+from algorithms.dijkstra import Dijkstra
+from algorithms.ida_star import IdaStar
+from services.input_check import InputCheck
 
 class PerformanceTest():
     """This class tests performance of both algorithms
@@ -10,6 +13,38 @@ class PerformanceTest():
 
     def __init__(self):
         pass
+
+    def test_gradual_performance(self):
+        """Plots performace results from 15x15 map
+        """
+        results = {}
+        results["dijkstra"] = []
+        results["ida_star"] = []
+        for y in range(14):
+            for x in range(14):
+                if InputCheck().check_input(current_map="map_2.txt", x_start=0, y_start=0, x_end=x, y_end=y):
+                    dijkstra_result = Dijkstra("map_2.txt").find_route(start_x=0, start_y=0, end_x=x, end_y=y)
+                    ida_star_result = IdaStar("map_2.txt").find_route(start_x=0, start_y=0, end_x=x, end_y=y)
+                    if dijkstra_result:
+                        results["dijkstra"].append((dijkstra_result[1], dijkstra_result[2].microsecond))
+                    if ida_star_result:
+                        results["ida_star"].append((ida_star_result[1], ida_star_result[2].microsecond))
+        for result in results["dijkstra"]:
+            plt.plot(result[0],result[1], label="Dijkstra")
+        
+        for result in results["ida_star"]:
+            plt.plot(result[0],result[1], label="IDA*")
+        
+        plt.xlabel("Time took (microseconds)")
+
+        plt.ylabel("Path length")
+
+        plt.title("Time effiency in 30x30 map")
+
+        plt.legend()
+
+        plt.show()
+
 
     def test_heap_performance(self):
         """Tests heap with 1000 push and pop calls, comparing results to Python's own heapq heap.

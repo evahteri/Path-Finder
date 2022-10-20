@@ -100,7 +100,7 @@ class IdaStar():
                 finish_time = datetime.datetime.now()
                 print(f" IDA* found route found in {finish_time-start_time}")
                 # Return tuple with distance matrix and shortest path length
-                return (self.distance_matrix, self.distance)
+                return (self.distance_matrix, self.distance, finish_time)
             # If search function returns max int, any path isn't found
             if new_threshold == float("inf"):
                 return False
