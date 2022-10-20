@@ -169,7 +169,12 @@ class StartViewUi:
             self._grid()
             return messagebox.showerror(title="Invalid input", message="Invalid input")
         distance_matrix = Dijkstra(self.current_map.get()).find_route(
-            int(start_x), int(start_y), int(end_x), int(end_y))[0]
+            int(start_x), int(start_y), int(end_x), int(end_y))
+        if distance_matrix:
+            distance_matrix = distance_matrix[0]
+        else:
+            self._grid()
+            return messagebox.showerror(title="No path found", message="Dijkstra could not find any path to goal node.")
         map_size = 0
         for i in distance_matrix:
             map_size += 1
