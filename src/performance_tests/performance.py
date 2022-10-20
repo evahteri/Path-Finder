@@ -18,7 +18,15 @@ class PerformanceTest():
         python_heap_time = Heap_Performance().test_python_heap_push_and_pop_1000_times()
         print(f"My heap did 1000 push and pop functions in {own_heap_time.microseconds} microseconds. \
             Python's heapq did the same in {python_heap_time.microseconds} microseconds.")
-        return (own_heap_time, python_heap_time)
+        difference_time = abs(own_heap_time - python_heap_time)
+        if own_heap_time > python_heap_time:
+            difference_percentage = round(
+                (difference_time / own_heap_time * 100), 2)
+            return (own_heap_time, python_heap_time, difference_percentage)
+        else:
+            difference_percentage = round(
+                (difference_time / python_heap_time * 100), 2)
+            return (own_heap_time, python_heap_time, difference_percentage)
 
     def test_performance_10x10_map(self):
         """Tests 100 random routes through 10x10 map with walls.

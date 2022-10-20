@@ -37,14 +37,14 @@ TODO
 
 ## Performance
 
-Note: Not yet implemented!
+TODO
 
-The algorithms and heap are tested with multiple inputs. Both algorithms are run multiple times in a row with different coordinates and then time is counted how long it takes. Then the two times can be compared.
 
-Heap functions are tested invidually multiple times and compared to Python's own heapq module.
 
 ## Sources
 
 Tirakirja by Antti Laaksonen [https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/]
 
 IDA* Algorithm in general by algorithmsinsight [https://algorithmsinsight.wordpress.com/graph-theory-2/ida-star-algorithm-in-general/]
+
+Iterative deepening A* - Wikipedia [https://en.wikipedia.org/wiki/Iterative_deepening_A*]

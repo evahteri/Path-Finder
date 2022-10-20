@@ -27,6 +27,7 @@ class StartViewUi:
         self.maps = []
 
         self._base()
+        self._grid()
 
     def pack(self):
         """Shows the view
@@ -275,4 +276,5 @@ class StartViewUi:
     
     def _handle_performance_heap(self):
         result = PerformanceTest().test_heap_performance()
-        return messagebox.showinfo(title="Results", message=f"My heap did 1000 push and pop operations in {result[0].microseconds} microseconds. Python's heapq did the same in {result[1].microseconds} microseconds.")
+        return messagebox.showinfo(title="Results", message=f"My heap did 1000 push and pop operations in {result[0].microseconds} microseconds.\
+        Python's heapq did the same in {result[1].microseconds} microseconds. ({result[2]}% faster)")

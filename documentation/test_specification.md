@@ -22,4 +22,20 @@ Routes are visualized in graphic user interface. Visited nodes (pixels) are yell
 
 ## Performance testing
 
-Dijkstra's automated performance test can be run via gui.
+Both algorithms are tested with multiple inputs inside multiple maps. These tests can be run by user via gui.
+
+Test inputs are:
+- 100 random start and end coordinates inside 10x10 map
+- 100 random start and end coordinates inside 15x15 map
+- 100 random start and end coordinates inside 30x30 map
+- 10 random start and end coordinates inside 50x50 map
+
+There are just 10 inputs inside 50x50 map, because IDA* tends to take so much time with complicated/large maps.
+
+Results are showed as printed lines in terminal and in a messagebox via gui. Results include run time as microseconds and percentage difference (difference in run time / slower algorithm run time * 100).
+
+Heap's performance is tested with 1000 push and pop calls, and it is compared to Python's heapq module's heap with same calls. Function counts the time and percentage difference.
+
+## Coverage report
+
+insert final coverage report here
