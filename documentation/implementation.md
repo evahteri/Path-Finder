@@ -10,8 +10,6 @@ Program is used through graphical user interface, which is done with TkInter. It
 
 The main function is find_route. Start time is taken first, then the function will call initialize -function to establish the distance matrix and neighbours -dictionary from the map. There are two for -loops to check every pixel. The function will check where the current pixel is on the map, for example if it is on the left side, it will not add any neighbour from the left side, as there is no pixel to add. After the initialize call, we know neighbours to every node and have the distance matrix with "walls" as "@" and every distance is 999.
 
-Next the input will be checked. Nothing special here.
-
 Now the main function will start. The start node is added to the heap. Next while loop starts and it will last as long as there are nodes in the heap. The smallest node is removed from the heap. If we have visited the smallest node already, we can continue. Unless not, we'll add the node to "visited" list. Then we will check it's neighbours, if the "new" distance is less our current distance, we'll improve the distance to the distance matrix and push the neighbour to the with the improved distance. This loop will continute until no distance can be improved.
 
 Lastly, the shortest path can be fetched from the previous nodes and the shortest path is counted at the same time. The start time is stopped and the function will return a tuple with the distance matrix and the shortest path length.
@@ -33,7 +31,34 @@ Push function will add a new node to the list and then adjust the heap until the
 Pop function will remove the smallest (root) node from the heap and then make the last node as the root node. Now the heap will be adjusted until there are no more smaller parents to that node.
 
 ## Time and Space complexities
-TODO
+
+### IDA*
+
+#### Time complexity
+
+IDA*'s time complexity depends on the problem and the efficiency of the heuristic. 
+
+Our graph's branching factor is generally 4, because every node can have maximum of 4 neighbours. However when using maps with more walls, this will be less as we won't add walls as neighbours.
+
+The more accurate heuristic, the better is the time complexity. This works for both ways. Every time the f score is bigger than threshold, algorithm has to iterate. IDA*'s iterations are quite time consuming in a large graph and with a branching factor 4, the graph is very large.
+
+The heuristic I implemented is Manhattan distance and it will choke especially if the map requires a lot of "steps left". This will cause many unnecessary iterations that adds up to the run time. While there are many alternatives, an accurate heuristic is difficult to choose, especially when the input is a random map.
+
+The time complexity of IDA* IS O(b**d), where b is the branching factor and d is the depth of the found goal node. Altough there are some discussion to be had if this is the correct time complexity, in my opinion it seems accurate when comparing to my empiric results.
+
+#### Space complexity
+
+IDA*'s space complexity is linear to the length of the fastest route, because only the current fastest route is stored in the memory. So space complexity is O(d), where d is "the shallowest goal node".
+
+### Dijkstra
+
+#### Time complexity
+
+Dijkstra will visit every coordinate and their neighbours in the map, which takes O(n + m) (n=number of nodes, m=numer of neighbours) time. Every node has maximum of 4 neighbours. In worst case scenario, the algorithm will add every node to the heap. In my opinion I implemented heap as efficiently as possible with Python, so the worst case scenario operations will take time O(mlogm). Every node that is pushed, will also be popped. This will happen in O(mlogm) too. Total time complexity will be O(n+mlogm).
+
+#### Space complexity
+
+The algorithm keeps a long queue of nodes in memory, which can be very taxing. Worst case scenario, every node will be at some point added to the heap, so space complexity can get to O(n+m).
 
 ## Performance
 
@@ -48,3 +73,5 @@ Tirakirja by Antti Laaksonen [https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/]
 IDA* Algorithm in general by algorithmsinsight [https://algorithmsinsight.wordpress.com/graph-theory-2/ida-star-algorithm-in-general/]
 
 Iterative deepening A* - Wikipedia [https://en.wikipedia.org/wiki/Iterative_deepening_A*]
+
+Time complexity of iterative-deepening-A by R. Korf, M. Reid, S. Edelkamp 2001 [https://doi.org/10.1016/S0004-3702(01)00094-7]
