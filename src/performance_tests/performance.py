@@ -1,5 +1,8 @@
+import matplotlib
+matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
-from performance_tests import ida_star_performance_test
+import time
+import signal
 from performance_tests.dijkstra_performance_test import Dijkstra_Performance
 from performance_tests.ida_star_performance_test import IdaStar_Performance
 from performance_tests.heap_performance_test import Heap_Performance
@@ -15,29 +18,46 @@ class PerformanceTest():
         pass
 
     def test_gradual_performance(self):
-        """Plots performace results from 15x15 map
+        """Plots performace results 
         """
+        plt.clf()
         results = {}
         results["dijkstra"] = []
         results["ida_star"] = []
-        for y in range(14):
-            for x in range(14):
+        d_handled_distances = []
+        i_handled_distances = []
+        for y in range(30):
+            for x in range(30):
                 if InputCheck().check_input(current_map="map_2.txt", x_start=0, y_start=0, x_end=x, y_end=y):
+                    print(x,y)
                     dijkstra_result = Dijkstra("map_2.txt").find_route(start_x=0, start_y=0, end_x=x, end_y=y)
                     ida_star_result = IdaStar("map_2.txt").find_route(start_x=0, start_y=0, end_x=x, end_y=y)
                     if dijkstra_result:
-                        results["dijkstra"].append((dijkstra_result[1], dijkstra_result[2].microsecond))
+                        if dijkstra_result[1] not in d_handled_distances:
+                            results["dijkstra"].append((dijkstra_result[1], dijkstra_result[2].microsecond))
+                            d_handled_distances.append(dijkstra_result[1])
                     if ida_star_result:
-                        results["ida_star"].append((ida_star_result[1], ida_star_result[2].microsecond))
-        for result in results["dijkstra"]:
-            plt.plot(result[0],result[1], label="Dijkstra")
+                        if ida_star_result[1] not in i_handled_distances:
+                            i_handled_distances.append(ida_star_result[1])
+                            results["ida_star"].append((ida_star_result[1], ida_star_result[2].microsecond))
+        results_dijkstra = sorted(results["dijkstra"], key= lambda value: value[0])
+        results_ida_star = sorted(results["ida_star"], key= lambda value: value[0])
+        x = []
+        y = []
+        for result in results_dijkstra:
+            x.append(result[0])
+            y.append(result[1])
+        plt.plot(x, y, label="Dijkstra")
+        x_2 = []
+        y_2 = []
+        for result in results_ida_star:
+            x_2.append(result[0])
+            y_2.append(result[1])
+        plt.plot(x_2, y_2, label="IDA*")
         
-        for result in results["ida_star"]:
-            plt.plot(result[0],result[1], label="IDA*")
-        
-        plt.xlabel("Time took (microseconds)")
+        plt.ylabel("Time took (microseconds)")
 
-        plt.ylabel("Path length")
+        plt.xlabel("Path length")
 
         plt.title("Time effiency in 30x30 map")
 
