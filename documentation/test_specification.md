@@ -24,7 +24,17 @@ This command creates a htmlcov folder, where you can find index.html. Copy it's 
 
 ## Empiric testing
 
-Routes are visualized in graphic user interface. Visited nodes (pixels) are yellow, fastest route is green and unvisited nodes stay white. The app also prints the length of the shortest path.
+Here are results of the performance tests that can be run by the user:
+10x10 map
+![performance in 10x10](https://github.com/evahteri/Path-Finder/blob/main/documentation/performance_test_10x10.png)
+15x15 map
+![performance in 15x15](https://github.com/evahteri/Path-Finder/blob/main/documentation/performance_test_15x15.png)
+30x30 map
+![performance in 30x30](https://github.com/evahteri/Path-Finder/blob/main/documentation/performance_test_10x10.png)
+
+It is better to run these tests yourself and inspect graphs by zooming in and testing different inputs.
+
+
 
 ## Performance testing
 

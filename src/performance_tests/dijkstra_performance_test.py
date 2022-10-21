@@ -25,7 +25,7 @@ class Dijkstra_Performance():
                     start_x, start_y, goal_x, goal_y)
         finish_time = datetime.datetime.now()
         return finish_time-start_time
-    
+
     def test_dijkstra_100_times_15x15_map(self):
         """Paths are fetched 100 times in 15x15 sized map (map_2.txt)
         """
@@ -55,7 +55,7 @@ class Dijkstra_Performance():
                     start_x, start_y, goal_x, goal_y)
         finish_time = datetime.datetime.now()
         return finish_time-start_time
-    
+
     def test_dijkstra_10_times_50x50_map(self):
         """Paths are fetched 10 times in 50x50 sized map (map_3.txt)
         """

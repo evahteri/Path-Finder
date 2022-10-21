@@ -307,7 +307,7 @@ class StartViewUi:
         result = PerformanceTest().test_performance_10x10_map()
         return messagebox.showinfo(title="Results", message=f"100 calls made, {result[0]} was \
         {result[2]}% faster! ({result[1]} microseconds)!")
-    
+
     def _handle_performance_15x15_map(self):
         """Function to test performance through the performance class
 
@@ -337,7 +337,7 @@ class StartViewUi:
         result = PerformanceTest().test_performance_50x50_map()
         return messagebox.showinfo(title="Results", message=f"10 calls made, {result[0]} was \
         {result[2]}% faster! ({result[1]} microseconds)!")
-    
+
     def _handle_performance_heap(self):
         """Function to test heap's performance through the performance class
 
@@ -351,5 +351,5 @@ class StartViewUi:
     def _handle_performance_with_plotting(self):
         """Function to test performance with current map and visualizes results in a graph
         """
-        current_map=self.current_map.get()
+        current_map = self.current_map.get()
         PerformanceTest().test_performance_plot(current_map)
