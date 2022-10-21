@@ -30,7 +30,7 @@ Here are results of the performance tests that can be run by the user:
 15x15 map
 ![performance in 15x15](https://github.com/evahteri/Path-Finder/blob/main/documentation/performance_test_15x15.png)
 30x30 map
-![performance in 30x30](https://github.com/evahteri/Path-Finder/blob/main/documentation/performance_test_10x10.png)
+![performance in 30x30](https://github.com/evahteri/Path-Finder/blob/main/documentation/performance_test_30x30.png)
 
 It is better to run these tests yourself and inspect graphs by zooming in and testing different inputs.
 
