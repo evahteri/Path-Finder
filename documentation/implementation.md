@@ -65,7 +65,9 @@ The algorithm keeps a long queue of nodes in memory, which can be very taxing. W
 ### Algorithms
 
 With smaller and simpler maps, IDA* is consistently faster than Dijkstra. For example in 10x10 map, it is 30-50% faster. When moving to larger maps, Dijkstra is faster. For example in 15x15 map, the difference is noticeable in graph form:
+
 ![performance in 15x15 map](https://github.com/evahteri/Path-Finder/blob/main/documentation/performance_test_15x15.png)
+
 Here we can see that Dijkstra is faster when handling longer paths. IDA* is faster at the start when zooming in, but the difference is not big. When moving to a 30x30 map, Dijkstra is usually 100% faster than IDA*
 
 The results don't depend only on the path length. When IDA*'s heuristic's estimation is worse, the run time increases. When inspecting the slower inputs, we can see that the manhattan distance is quite far from the reality. This is why in some performance tests, Dijkstra is faster, even though a smaller map is in use. Because the inputs are random, if there is these kind of puuteinputs, where mahnattan distance is a poor estimation, Dijkstra will be noticeably faster.
