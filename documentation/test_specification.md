@@ -2,7 +2,13 @@
 
 ## Automatic testing
 
-Testing is done with pytest and currently tests if Dijkstra and IDA* finds fastest route through the map. First, Dijkstra is tested with manually counted shortest paths, with different inputs. Now we can be sure that Dijkstra always finds the correct route. IDA* is tested with the help of Dijkstra; every output has to match Dijkstra's output to make sure the route is correct.
+Testing is done with pytest and currently tests if Dijkstra and IDA* finds fastest route through the map. First, Dijkstra is tested with manually counted shortest paths, with different inputs. Now we can be sure that Dijkstra always finds the correct route. IDA* is tested with the help of Dijkstra; every output has to match Dijkstra's output to make sure the route is correct. 
+
+Heap is tested with push and pop calls and then the heap's length is measured to make sure they work.
+
+Input checker is tested with multiple different inputs and map size function is tested once.
+
+Automated tests cover 98% of the program's core functionality.
 
 ```bash
 poetry run invoke test
@@ -35,6 +41,8 @@ There are just 10 inputs inside 50x50 map, because IDA* tends to take so much ti
 Results are showed as printed lines in terminal and in a messagebox via gui. Results include run time as microseconds and percentage difference (difference in run time / slower algorithm run time * 100).
 
 Heap's performance is tested with 1000 push and pop calls, and it is compared to Python's heapq module's heap with same calls. Function counts the time and percentage difference.
+
+The user can also test algorithms with any map and plot the results as two different graphs.
 
 ## Coverage report
 

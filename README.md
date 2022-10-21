@@ -16,9 +16,12 @@ Path Finder is a algorithm project made for data structures lab course in the Un
 - [Test coverage](https://github.com/evahteri/Path-Finder/blob/main/documentation/coverage_report.png)
 - [Test specification](https://github.com/evahteri/Path-Finder/blob/main/documentation/test_specification.md)
 - [Implementation document](https://github.com/evahteri/Path-Finder/blob/main/documentation/implementation.md)
+- [User Guide](https://github.com/evahteri/Path-Finder/blob/main/documentation/user_guide.md)
 
 
-## User guide
+## Quick guide
+
+For a more comprehensive guide, see [User Guide](https://github.com/evahteri/Path-Finder/blob/main/documentation/user_guide.md)
 
 ### Installation
 
@@ -29,25 +32,25 @@ Download this project on your computer and run these commands.
 ```bash
 poetry install
 ```
-#### Launching the program
+### Launching the program
 
 ```bash
 poetry run invoke start
 ```
-#### Running tests
+### Running tests
 
 ```bash
 poetry run invoke test
 ```
 
-#### Coverage report
+### Coverage report
 
 ```bash
 poetry run invoke coverage-report
 ```
 This command creates a htmlcov folder, where you can find index.html, which includes a visual coverage report
 
-#### Checking style
+### Checking style
 
 With this command you can check if code is up to the standard python style of code
 
@@ -55,11 +58,9 @@ With this command you can check if code is up to the standard python style of co
 poetry run invoke lint
 ```
 
-#### Performance testing
+### Performance testing
 
 
 ```bash
 poetry run invoke performance
 ```
-
-

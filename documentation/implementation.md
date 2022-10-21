@@ -62,9 +62,31 @@ The algorithm keeps a long queue of nodes in memory, which can be very taxing. W
 
 ## Performance
 
-TODO
+### Algorithms
 
+With smaller and simpler maps, IDA* is consistently faster than Dijkstra. For example in 10x10 map, it is 30-50% faster. When moving to larger maps, Dijkstra is faster. For example in 15x15 map, the difference is noticeable in graph form:
+![performance in 15x15 map](https://github.com/evahteri/Path-Finder/blob/main/documentation/performance_test_15x15.png)
+Here we can see that Dijkstra is faster when handling longer paths. IDA* is faster at the start when zooming in, but the difference is not big. When moving to a 30x30 map, Dijkstra is usually 100% faster than IDA*
 
+The results don't depend only on the path length. When IDA*'s heuristic's estimation is worse, the run time increases. When inspecting the slower inputs, we can see that the manhattan distance is quite far from the reality. This is why in some performance tests, Dijkstra is faster, even though a smaller map is in use. Because the inputs are random, if there is these kind of puuteinputs, where mahnattan distance is a poor estimation, Dijkstra will be noticeably faster.
+
+All of these performance tests can be run by the user via the graphical user interface.
+
+### Heap
+
+I am content with the heap's performance. Altough, it isn't as efficient as Python's heapq class, it is still performing quite nicely. With 1000 push and pop calls, heapq is about 80% faster than my implementation.
+
+### Analysis
+
+When choosing between Dijkstra and IDA* as path finding algorithms, my results indicate that if there's no data about the map, then Dijkstra will offer a more stable performance. If we know some characteristics about the maps, we can create a more accurate heuristic for IDA* to improve it's performance.
+
+My conclusion is that IDA* will only work better with smaller inputs and with situations where the heuristic works best. These findings are in line with my source materials, as they implied that IDA*'s time efficiency relies heavily on the heuristic.
+
+## Flaws and possible improvements
+
+Algorithm functions could be improved if the map is initialized before the algorthm functions are called. I decided that I will add the initialization time with the actual algorithm's run time, because the map still needs to be processed to a correct form (graph, matrix, etc), so technically it is part of the algorithm. If I was to make a perfectly optimized program, this would be my only improvement on performance.
+
+The program could be prettier, but looks weren't the focus, so I don't mind a boring gui.
 
 ## Sources
 
