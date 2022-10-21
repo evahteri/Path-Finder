@@ -16,4 +16,5 @@
 | 15.10  | 4     | Documentation, tests, performance tests                |
 | 16.10  | 2     | Performance tests                                      |
 | 20.10  | 3     | Documentation, finishing touches                       |
-| Total  | 46    |                                                        |
+| 21.10  | 2     | Plotting performance testing                           |
+| Total  | 48    |                                                        |

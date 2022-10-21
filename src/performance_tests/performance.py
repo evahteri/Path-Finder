@@ -1,14 +1,13 @@
 import matplotlib
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
-import time
-import signal
 from performance_tests.dijkstra_performance_test import Dijkstra_Performance
 from performance_tests.ida_star_performance_test import IdaStar_Performance
 from performance_tests.heap_performance_test import Heap_Performance
 from algorithms.dijkstra import Dijkstra
 from algorithms.ida_star import IdaStar
 from services.input_check import InputCheck
+from services.map_helper import MapHelper
 
 class PerformanceTest():
     """This class tests performance of both algorithms
@@ -17,7 +16,7 @@ class PerformanceTest():
     def __init__(self):
         pass
 
-    def test_gradual_performance(self):
+    def test_performance_plot(self, current_map):
         """Plots performace results 
         """
         plt.clf()
@@ -26,12 +25,13 @@ class PerformanceTest():
         results["ida_star"] = []
         d_handled_distances = []
         i_handled_distances = []
-        for y in range(30):
-            for x in range(30):
-                if InputCheck().check_input(current_map="map_2.txt", x_start=0, y_start=0, x_end=x, y_end=y):
+        map_length = MapHelper(current_map).get_map_size()
+        for y in range(map_length):
+            for x in range(map_length):
+                if InputCheck().check_input(current_map=current_map, x_start=0, y_start=0, x_end=x, y_end=y):
                     print(x,y)
-                    dijkstra_result = Dijkstra("map_2.txt").find_route(start_x=0, start_y=0, end_x=x, end_y=y)
-                    ida_star_result = IdaStar("map_2.txt").find_route(start_x=0, start_y=0, end_x=x, end_y=y)
+                    dijkstra_result = Dijkstra(current_map).find_route(start_x=0, start_y=0, end_x=x, end_y=y)
+                    ida_star_result = IdaStar(current_map).find_route(start_x=0, start_y=0, end_x=x, end_y=y)
                     if dijkstra_result:
                         if dijkstra_result[1] not in d_handled_distances:
                             results["dijkstra"].append((dijkstra_result[1], dijkstra_result[2].microsecond))
@@ -59,7 +59,7 @@ class PerformanceTest():
 
         plt.xlabel("Path length")
 
-        plt.title("Time effiency in 30x30 map")
+        plt.title(f"Time effiency in {map_length}x{map_length} map (Higher is worse)")
 
         plt.legend()
 

@@ -132,10 +132,10 @@ class StartViewUi:
         )
         test_performance_heap_button.grid(row=15, column=0)
 
-        test_gradual_performance_button = ttk.Button(
-            master=self._frame, text="Test gradual performance with plotting", command=self._handle_gradual_performance
+        test_performance_with_plotting_button = ttk.Button(
+            master=self._frame, text="Test performance in current map with plotting", command=self._handle_performance_with_plotting
         )
-        test_gradual_performance_button.grid(row=16, column=0)
+        test_performance_with_plotting_button.grid(row=16, column=0)
 
     def _grid(self):
         self.grid.delete("all")
@@ -284,5 +284,6 @@ class StartViewUi:
         return messagebox.showinfo(title="Results", message=f"My heap did 1000 push and pop operations in {result[0].microseconds} microseconds.\
         Python's heapq did the same in {result[1].microseconds} microseconds. ({result[2]}% faster)")
 
-    def _handle_gradual_performance(self):
-        PerformanceTest().test_gradual_performance()
+    def _handle_performance_with_plotting(self):
+        current_map=self.current_map.get()
+        PerformanceTest().test_performance_plot(current_map)
