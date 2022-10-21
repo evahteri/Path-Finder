@@ -36,7 +36,7 @@ class TestIdaStar(unittest.TestCase):
     def test_ida_star_impossible_route(self):
         """Test if algorithm returns False when no route can be found
         """
-        path = IdaStar("map_4.txt").find_route(
+        path = IdaStar("map_6.txt").find_route(
             start_x=0, start_y=0, end_x=4, end_y=4)
 
         self.assertEqual(False, path)
