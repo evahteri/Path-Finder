@@ -19,6 +19,7 @@ class PerformanceTest():
     def test_performance_plot(self, current_map):
         """Plots performace results 
         """
+        # Clear current canvas if exists
         plt.clf()
         results = {}
         results["dijkstra"] = []
@@ -26,12 +27,13 @@ class PerformanceTest():
         d_handled_distances = []
         i_handled_distances = []
         map_length = MapHelper(current_map).get_map_size()
+        # Start coordinate will be (0,0). End coordinate is changing in range of the map size. 
         for y in range(map_length):
             for x in range(map_length):
                 if InputCheck().check_input(current_map=current_map, x_start=0, y_start=0, x_end=x, y_end=y):
-                    print(x,y)
                     dijkstra_result = Dijkstra(current_map).find_route(start_x=0, start_y=0, end_x=x, end_y=y)
                     ida_star_result = IdaStar(current_map).find_route(start_x=0, start_y=0, end_x=x, end_y=y)
+                    # If path is found, the distance is added to handled distances and to the algorithm's results
                     if dijkstra_result:
                         if dijkstra_result[1] not in d_handled_distances:
                             results["dijkstra"].append((dijkstra_result[1], dijkstra_result[2].microsecond))
@@ -40,6 +42,7 @@ class PerformanceTest():
                         if ida_star_result[1] not in i_handled_distances:
                             i_handled_distances.append(ida_star_result[1])
                             results["ida_star"].append((ida_star_result[1], ida_star_result[2].microsecond))
+        # Sort the results based on the distance for the pyplot function to work correctly
         results_dijkstra = sorted(results["dijkstra"], key= lambda value: value[0])
         results_ida_star = sorted(results["ida_star"], key= lambda value: value[0])
         x = []
@@ -53,6 +56,7 @@ class PerformanceTest():
         for result in results_ida_star:
             x_2.append(result[0])
             y_2.append(result[1])
+
         plt.plot(x_2, y_2, label="IDA*")
         
         plt.ylabel("Time took (microseconds)")
@@ -107,6 +111,9 @@ class PerformanceTest():
             return ("Dijkstra", difference_time.microseconds, difference_percentage)
         
     def test_performance_15x15_map(self):
+        """Tests 100 random routes through 15x15 map with walls.
+        After testing, the time difference is counted.
+        """
         dijkstra_time = Dijkstra_Performance().test_dijkstra_100_times_15x15_map()
         ida_star_time = IdaStar_Performance().test_ida_star_100_times_15x15_map()
         print(
@@ -127,6 +134,9 @@ class PerformanceTest():
             return ("Dijkstra", difference_time.microseconds, difference_percentage)
     
     def test_performance_30x30_map(self):
+        """Tests 100 random routes through 30x30 map with walls.
+        After testing, the time difference is counted.
+        """
         dijkstra_time = Dijkstra_Performance().test_dijkstra_100_times_30x30_map()
         ida_star_time = IdaStar_Performance().test_ida_star_100_times_30x30_map()
         print(
@@ -147,6 +157,9 @@ class PerformanceTest():
             return ("Dijkstra", difference_time.microseconds, difference_percentage)
 
     def test_performance_50x50_map(self):
+        """Tests 10 random routes through 50x50 map with walls.
+        After testing, the time difference is counted.
+        """
         dijkstra_time = Dijkstra_Performance().test_dijkstra_10_times_50x50_map()
         ida_star_time = IdaStar_Performance().test_ida_star_10_times_50x50_map()
         print(
@@ -165,4 +178,3 @@ class PerformanceTest():
             print(
                 f"Dijkstra star was faster by {difference_time.microseconds} microseconds, {difference_percentage}")
             return ("Dijkstra", difference_time.microseconds, difference_percentage)
-

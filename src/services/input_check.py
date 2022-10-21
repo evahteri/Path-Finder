@@ -2,8 +2,22 @@ from services.map_helper import MapHelper
 
 
 class InputCheck():
+    """Class for checking inputs
+    """
 
     def check_input(self, current_map, x_start, y_start, x_end, y_end):
+        """Input checker to make sure the coordinates aren't walls or out of bounds
+
+        Args:
+            current_map (string): string that describes the current map .txt file
+            x_start (int): x coordinate for start
+            y_start (int): y coordinate for start
+            x_end (int): x coordinate for start
+            y_end (int): y coordinate for start
+
+        Returns:
+            Boolean: True if input is valid, False else
+        """
         map_size = MapHelper(current_map).get_map_size()
         current_map = open(f"src/static/maps/{current_map}", "r")
         map = current_map.read().splitlines()
