@@ -38,4 +38,4 @@ Heap's performance is tested with 1000 push and pop calls, and it is compared to
 
 ## Coverage report
 
-insert final coverage report here
+![coverage report](https://github.com/evahteri/Path-Finder/blob/main/documentation/coverage_report.png)
