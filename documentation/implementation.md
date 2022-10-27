@@ -18,7 +18,7 @@ Lastly, the shortest path can be fetched from the previous nodes and the shortes
 
 First a graph is initialized. There are nodes and their children are the neighbours. This is done with two for -loops. The heuristic is counted. This algorithm uses a "manhattan distance" as a heuristic. It is counted from the difference between the start and end node's x and y coordinates. 
 
-A while loop is entered which will last until we have found the shortest path. The loop will call _search -function that uses recursion to find shortest distances. With each function call the threshold is updated. The _search -function will return only the new cost to reach that node if it is larger than the treshold, so it will not explore any more of it's neighbours, so time is saved. Each time the f value is less than treshold, we will explore the node's neighbours and update the cost to reach that node. 
+A while loop is entered which will last until we have found the shortest path. The loop will call _search -function that uses recursion to find shortest distances. With each function call the threshold is updated. The _search -function will return only the new cost to reach that node if it is larger than the threshold, so it will not explore any more of it's neighbours, so time is saved. Each time the f value is less than treshold, we will explore the node's neighbours and update the cost to reach that node. 
 
 ### Heap
 
@@ -60,6 +60,12 @@ Dijkstra will visit every coordinate and their neighbours in the map, which take
 
 The algorithm keeps a long queue of nodes in memory, which can be very taxing. Worst case scenario, every node will be at some point added to the heap, so space complexity can get to O(n+m).
 
+### Heap
+
+#### Time complexity
+
+Push and pop functions' time complexities are O(logn).
+
 ## Performance
 
 ### Algorithms
@@ -70,7 +76,7 @@ With smaller and simpler maps, IDA* is consistently faster than Dijkstra. For ex
 
 Here we can see that Dijkstra is faster when handling longer paths. IDA* is faster at the start when zooming in, but the difference is not big. When moving to a 30x30 map, Dijkstra is usually 100% faster than IDA*
 
-The results don't depend only on the path length. When IDA*'s heuristic's estimation is worse, the run time increases. When inspecting the slower inputs, we can see that the manhattan distance is quite far from the reality. This is why in some performance tests, Dijkstra is faster, even though a smaller map is in use. Because the inputs are random, if there is these kind of puuteinputs, where mahnattan distance is a poor estimation, Dijkstra will be noticeably faster.
+The results don't depend only on the path length. When IDA*'s heuristic's estimation is worse, the run time increases. When inspecting the slower inputs, we can see that the manhattan distance is quite far from the reality. This is why in some performance tests, Dijkstra is faster, even though a smaller map is in use. Because the inputs are random, if there are inputs, where mahnattan distance is a poor estimation, Dijkstra will be noticeably faster.
 
 All of these performance tests can be run by the user via the graphical user interface.
 
@@ -82,11 +88,11 @@ I am content with the heap's performance. Altough, it isn't as efficient as Pyth
 
 When choosing between Dijkstra and IDA* as path finding algorithms, my results indicate that if there's no data about the map, then Dijkstra will offer a more stable performance. If we know some characteristics about the maps, we can create a more accurate heuristic for IDA* to improve it's performance.
 
-My conclusion is that IDA* will only work better with smaller inputs and with situations where the heuristic works best. These findings are in line with my source materials, as they implied that IDA*'s time efficiency relies heavily on the heuristic.
+My conclusion is that IDA* will only work better with smaller inputs with less edges in the graph and in situations where the heuristic works best. These findings are in line with my source materials, as they implied that IDA*'s time efficiency relies heavily on the heuristic.
 
 ## Flaws and possible improvements
 
-Algorithm functions could be improved if the map is initialized before the algorthm functions are called. I decided that I will add the initialization time with the actual algorithm's run time, because the map still needs to be processed to a correct form (graph, matrix, etc), so technically it is part of the algorithm. If I was to make a perfectly optimized program, this would be my only improvement on performance.
+Algorithm functions could be improved if the map is initialized before the algorthm functions are called. I decided that I will add the initialization time with the actual algorithm's run time, because the map still needs to be processed to a correct form (graph, matrix, etc), so technically it is part of the algorithm. If I was to make a perfectly optimized program, this would be my only improvement on performance. To make the program better suited for real maps, travelling diagonally within the map would be a good improvement.
 
 The program could be prettier, but looks weren't the focus, so I don't mind a boring gui.
 
