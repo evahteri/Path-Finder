@@ -38,9 +38,7 @@ Here are results of the performance tests that can be run by the user:
 
 ![performance in 30x30](https://github.com/evahteri/Path-Finder/blob/main/documentation/performance_test_30x30.png)
 
-It is better to run these tests yourself and inspect graphs by zooming in and testing different inputs.
-
-
+It is better to run these tests yourself and inspect graphs by zooming in and testing different inputs. When inspecting these graphs, it is clear that Dijkstra is usually slower with smaller paths and IDA* is slower with longer paths. This is because IDA*'s time complexity is exponential to the number of the graph's (map's) edges. IDA* is usually also slow when it's heuristic (manhattan distance) is a poor evaluation of the shortest path. This can be seen, when there are a lot of walls in the map. User can try the tests with plotting with self made maps too.
 
 ## Performance testing
 

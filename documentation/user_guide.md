@@ -25,7 +25,7 @@ This view should pop up:
 
 ## Using the program
 
-On the top you can see current selected map. You can select the map from "Select map" button. Once selected, press "Show map" to see it. All maps are in src/static/maps folder. If you'd like to use your own maps, create a text file in that folder. Note that length and height should be the same. Please do not change the maps' names to ensure that there are no errors during performance tests/automated tests.
+On the top you can see current selected map. You can select the map from "Select map" button. Once selected, press "Show map" to see it. All maps are in src/static/maps folder. If you'd like to use your own maps, create a text file in that folder. Write "." as a travellable pixel and "@" as a wall. Note that length and height should be the same. Please do not change the maps' names to ensure that there are no errors during performance tests/automated tests.
 
 You can search shortest paths by entering coordinates to the text fields. Only numbers are accepted as input. Note that the left upper corner is (0,0). The program will notify is the input is incorrect. After you have entered the coordinates, press either Dijkstra or IDA* to find the route. The run time and path distance are printed to terminal. Shortest route is marked as green tiles in the map. Visited tiles are yellow and the start and goal nodes are violet.
 
