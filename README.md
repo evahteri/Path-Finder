@@ -58,10 +58,3 @@ With this command you can check if code is up to the standard python style of co
 ```bash
 poetry run invoke lint
 ```
-
-### Performance testing
-
-
-```bash
-poetry run invoke performance
-```
