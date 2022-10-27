@@ -4,7 +4,7 @@ from algorithms.ida_star import IdaStar
 from services.input_check import InputCheck
 
 
-class IdaStar_Performance():
+class IdaStarPerformance():
     """Class responsible for testing IDA*'s performance
     """
 
@@ -20,7 +20,8 @@ class IdaStar_Performance():
             start_y = randint(0, 9)
             goal_x = randint(0, 9)
             goal_y = randint(0, 9)
-            if InputCheck().check_input(current_map="map_1.txt", x_start=start_x, y_start=start_y, x_end=goal_x, y_end=goal_y):
+            if InputCheck().check_input(current_map="map_1.txt", x_start=start_x,
+                                        y_start=start_y, x_end=goal_x, y_end=goal_y):
                 IdaStar("map_1.txt").find_route(
                     start_x, start_y, goal_x, goal_y)
         finish_time = datetime.datetime.now()
@@ -35,7 +36,8 @@ class IdaStar_Performance():
             start_y = randint(0, 14)
             goal_x = randint(0, 14)
             goal_y = randint(0, 14)
-            if InputCheck().check_input(current_map="map_2.txt", x_start=start_x, y_start=start_y, x_end=goal_x, y_end=goal_y):
+            if InputCheck().check_input(current_map="map_2.txt", x_start=start_x,
+                                        y_start=start_y, x_end=goal_x, y_end=goal_y):
                 IdaStar("map_2.txt").find_route(
                     start_x, start_y, goal_x, goal_y)
         finish_time = datetime.datetime.now()
@@ -50,7 +52,8 @@ class IdaStar_Performance():
             start_y = randint(0, 29)
             goal_x = randint(0, 29)
             goal_y = randint(0, 29)
-            if InputCheck().check_input(current_map="map_4.txt", x_start=start_x, y_start=start_y, x_end=goal_x, y_end=goal_y):
+            if InputCheck().check_input(current_map="map_4.txt", x_start=start_x,
+                                        y_start=start_y, x_end=goal_x, y_end=goal_y):
                 IdaStar("map_4.txt").find_route(
                     start_x, start_y, goal_x, goal_y)
         finish_time = datetime.datetime.now()
@@ -65,7 +68,8 @@ class IdaStar_Performance():
             start_y = randint(0, 49)
             goal_x = randint(0, 49)
             goal_y = randint(0, 49)
-            if InputCheck().check_input(current_map="map_3.txt", x_start=start_x, y_start=start_y, x_end=goal_x, y_end=goal_y):
+            if InputCheck().check_input(current_map="map_3.txt", x_start=start_x,
+                                        y_start=start_y, x_end=goal_x, y_end=goal_y):
                 IdaStar("map_3.txt").find_route(
                     start_x, start_y, goal_x, goal_y)
         finish_time = datetime.datetime.now()

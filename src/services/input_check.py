@@ -20,7 +20,7 @@ class InputCheck():
         """
         map_size = MapHelper(current_map).get_map_size()
         current_map = open(f"src/static/maps/{current_map}", "r")
-        map = current_map.read().splitlines()
+        current_map = current_map.read().splitlines()
         try:
             if int(x_start) > map_size-1:
                 return False
@@ -42,8 +42,8 @@ class InputCheck():
             return False
         if (x_start, y_start) == (x_end, y_end):
             return False
-        if map[int(y_start)][int(x_start)] == "@":
+        if current_map[int(y_start)][int(x_start)] == "@":
             return False
-        if map[int(y_end)][int(x_end)] == "@":
+        if current_map[int(y_end)][int(x_end)] == "@":
             return False
         return True

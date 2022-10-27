@@ -1,5 +1,4 @@
 import os
-from re import X
 from tkinter import constants, ttk, Canvas, StringVar, messagebox
 from algorithms.ida_star import IdaStar
 from algorithms.dijkstra import Dijkstra
@@ -120,32 +119,38 @@ class StartViewUi:
 
         # Performance test buttons
         test_performance_10x10_map_button = ttk.Button(
-            master=self._frame, text="Test performance with 10X10 map", command=self._handle_performance_10x10_map
+            master=self._frame, text="Test performance with 10X10 map",
+            command=self._handle_performance_10x10_map
         )
         test_performance_10x10_map_button.grid(row=10, column=0)
 
         test_performance_15x15_map_button = ttk.Button(
-            master=self._frame, text="Test performance with 15X15 map", command=self._handle_performance_15x15_map
+            master=self._frame, text="Test performance with 15X15 map",
+            command=self._handle_performance_15x15_map
         )
         test_performance_15x15_map_button.grid(row=11, column=0)
 
         test_performance_30x30_map_button = ttk.Button(
-            master=self._frame, text="Test performance with 30X30 map", command=self._handle_performance_30x30_map
+            master=self._frame, text="Test performance with 30X30 map",
+            command=self._handle_performance_30x30_map
         )
         test_performance_30x30_map_button.grid(row=12, column=0)
 
         test_performance_50x50_map_button = ttk.Button(
-            master=self._frame, text="Test performance with 50x50 map", command=self._handle_performance_50x50_map
+            master=self._frame, text="Test performance with 50x50 map",
+            command=self._handle_performance_50x50_map
         )
         test_performance_50x50_map_button.grid(row=13, column=0)
 
         test_performance_heap_button = ttk.Button(
-            master=self._frame, text="Test heap performance with 1000 push and pop calls", command=self._handle_performance_heap
+            master=self._frame, text="Test heap performance with 1000 push and pop calls",
+            command=self._handle_performance_heap
         )
         test_performance_heap_button.grid(row=15, column=0)
 
         test_performance_with_plotting_button = ttk.Button(
-            master=self._frame, text="Test performance in current map with plotting", command=self._handle_performance_with_plotting
+            master=self._frame, text="Test performance in current map with plotting",
+            command=self._handle_performance_with_plotting
         )
         test_performance_with_plotting_button.grid(row=16, column=0)
 
@@ -155,13 +160,13 @@ class StartViewUi:
         # Empty current grid canvas
         self.grid.delete("all")
         # Get current selected map
-        map = self.current_map.get()
+        current_map = self.current_map.get()
         # Get map's size
-        self.map_size = MapHelper(map).get_map_size()
+        self.map_size = MapHelper(current_map).get_map_size()
         # Establish the pixel size
         self._pixel_size = 300 // self.map_size
         # Run through the current map to draw every coordinate to the canvas
-        with open(f"src/static/maps/{map}") as current_map:
+        with open(f"src/static/maps/{current_map}") as current_map:
             y_coordinate = 0
             x_coordinate = 0
             for row in current_map:
@@ -198,9 +203,13 @@ class StartViewUi:
         end_x = self.end_coordinate_x_entry.get()
         end_y = self.end_coordinate_y_entry.get()
         # Check input
-        if not InputCheck().check_input(current_map=self.current_map.get(), x_start=start_x, y_start=start_y, x_end=end_x, y_end=end_y):
+        if not InputCheck().check_input(
+                current_map=self.current_map.get(), x_start=start_x,
+                y_start=start_y, x_end=end_x, y_end=end_y):
             self._grid()
-            return messagebox.showerror(title="Invalid input", message="Invalid input")
+            return messagebox.showerror(
+                title="Invalid input",
+                message="Invalid input")
         # Call path from algorithm
         distance_matrix = Dijkstra(self.current_map.get()).find_route(
             int(start_x), int(start_y), int(end_x), int(end_y))
@@ -210,7 +219,9 @@ class StartViewUi:
         else:
             # If not, clear map and show error
             self._grid()
-            return messagebox.showerror(title="No path found", message="Dijkstra could not find any path to goal node.")
+            return messagebox.showerror(
+                title="No path found",
+                message="Dijkstra could not find any path to goal node.")
         map_size = MapHelper(self.current_map.get()).get_map_size()
         # Create a visual map from th edistance matrix
         self._pixel_size = 300 // map_size
@@ -255,10 +266,13 @@ class StartViewUi:
         end_x = self.end_coordinate_x_entry.get()
         end_y = self.end_coordinate_y_entry.get()
         # Check input
-        if not InputCheck().check_input(current_map=self.current_map.get(), x_start=start_x, y_start=start_y, x_end=end_x, y_end=end_y):
+        if not InputCheck().check_input(
+                current_map=self.current_map.get(), x_start=start_x,
+                y_start=start_y, x_end=end_x, y_end=end_y):
             # If input is invalid, clear map and show error
             self._grid()
-            return messagebox.showerror(title="Invalid input", message="Invalid input")
+            return messagebox.showerror(
+                title="Invalid input", message="Invalid input")
         # Get shortest path with IDA*
         distance_matrix = IdaStar(self.current_map.get()).find_route(
             int(start_x), int(start_y), int(end_x), int(end_y))
@@ -267,7 +281,9 @@ class StartViewUi:
         else:
             # If no path is found, show error
             self._grid()
-            return messagebox.showerror(title="No path found", message="IDA* could not find any path to goal node.")
+            return messagebox.showerror(
+                title="No path found",
+                message="IDA* could not find any path to goal node.")
         # Create a visual map from the distance matrix
         map_size = MapHelper(self.current_map.get()).get_map_size()
         self._pixel_size = 300 // map_size
@@ -345,8 +361,11 @@ class StartViewUi:
             Messagebox: Messagebox with the performance test results
         """
         result = PerformanceTest().test_heap_performance()
-        return messagebox.showinfo(title="Results", message=f"My heap did 1000 push and pop operations in {result[0].microseconds} microseconds.\
-        Python's heapq did the same in {result[1].microseconds} microseconds. ({result[2]}% faster)")
+        return messagebox.showinfo(
+            title="Results", message=f"""My heap did 1000 push and pop operations in
+            {result[0].microseconds} microseconds.
+            Python's heapq did the same in {result[1].microseconds} 
+            microseconds. ({result[2]}% faster)""")
 
     def _handle_performance_with_plotting(self):
         """Function to test performance with current map and visualizes results in a graph

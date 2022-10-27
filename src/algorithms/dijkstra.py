@@ -112,7 +112,8 @@ class Dijkstra():
                     self.previous_node[neighbour] = node
                     # Add neighbour with updated weight to the heap
                     self.heap.push([new, neighbour])
-        # Fetching the travelled path, if KeyError is raised, it means there is no route to goal node
+        # Fetching the travelled path,
+        # if KeyError is raised, it means there is no route to goal node
         try:
             previous = self.previous_node[(end_x, end_y)]
         except KeyError:

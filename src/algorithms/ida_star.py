@@ -5,10 +5,10 @@ class IdaStar():
     """Class that includes all functions for ida star algorithm
     """
 
-    def __init__(self, map):
+    def __init__(self, current_map):
         """Constructor that creates all needed data structures and local values
         """
-        self.map = map
+        self.map = current_map
         self.graph = {}
         self.distance_matrix = None
         self.distance = 0
@@ -34,7 +34,8 @@ class IdaStar():
         self.distance_matrix = [[999]*map_size for _ in range(map_size)]
         current_map = open(f"src/static/maps/{self.map}", "r")
         self.map = current_map.read().splitlines()
-        # Create a graph. The graph is a python dictionary with coordinates as keys and neighbours in a list
+        # Create a graph. The graph is a python dictionary
+        # with coordinates as keys and neighbours in a list
         for y in range(map_size):
             for x in range(map_size):
                 self.graph[(x, y)] = []

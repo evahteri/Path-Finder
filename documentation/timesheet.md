@@ -17,4 +17,5 @@
 | 16.10  | 2     | Performance tests                                      |
 | 20.10  | 3     | Documentation, finishing touches                       |
 | 21.10  | 2     | Plotting performance testing                           |
-| Total  | 48    |                                                        |
+| 27.10  | 2     | Final touch-ups                                        |
+| Total  | 50    |                                                        |
