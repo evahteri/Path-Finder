@@ -44,7 +44,13 @@ poetry run invoke start
 poetry run invoke test
 ```
 
-### Coverage report
+### Test coverage
+
+```bash
+poetry run invoke coverage
+```
+
+And then
 
 ```bash
 poetry run invoke coverage-report
