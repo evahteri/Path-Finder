@@ -9,6 +9,7 @@ Path Finder is a algorithm project made for data structures lab course in the Un
 - [Week 4](https://github.com/evahteri/Path-Finder/blob/main/documentation/weekly_reports/week4.md)
 - [Week 5](https://github.com/evahteri/Path-Finder/blob/main/documentation/weekly_reports/week5.md)
 - [Week 6](https://github.com/evahteri/Path-Finder/blob/main/documentation/weekly_reports/week6.md)
+- [Week 7](https://github.com/evahteri/Path-Finder/blob/main/documentation/weekly_reports/week7.md)
 
 ## Documentation
 - [Timesheet](https://github.com/evahteri/Path-Finder/blob/main/documentation/timesheet.md)
